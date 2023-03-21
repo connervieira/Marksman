@@ -17,7 +17,7 @@ $last_alert = end($alert_log); // Get the last entry in the alert log.
 
 // Display attention alerts.
 // Yellow
-foreach ($last_alert["attention"] as $key => $alert) { // Iterate through each time-based attention alert.
+foreach ($last_alert["attention"] as $key => $alert) { // Iterate through each attention alert.
     if ($key == "time") {
         echo "<table class=\"alert yellow\"><tr>";
         echo "    <th width=\"5%;\"><img src=\"img/alerts/attention.svg\" height=\"50px\"></th>";
@@ -30,7 +30,7 @@ foreach ($last_alert["attention"] as $key => $alert) { // Iterate through each t
 
 // Display GPS alerts.
 // Green
-foreach ($last_alert["gps"] as $key => $alert) { // Iterate through each time-based attention alert.
+foreach ($last_alert["gps"] as $key => $alert) { // Iterate through each GPS alert.
     echo "<table class=\"alert green\"><tr>";
     echo "    <th width=\"5%\"><img src=\"img/alerts/gps.svg\" height=\"50px\"></th>";
     if ($key == "maxspeed") {
@@ -63,11 +63,50 @@ foreach ($last_alert["gps"] as $key => $alert) { // Iterate through each time-ba
 
 
 // Display drone alerts.
-// Blue
+// Magenta
+foreach ($last_alert["drone"] as $alert) { // Iterate through each automonous threat alert.
+    echo "<table class=\"alert cyan\"><tr>";
+    echo "    <th width=\"5%\"><img src=\"img/alerts/drone.svg\" style=\"height:50px;transform:rotate(" . $alert["relativeheading"] . "deg);\"></th>";
+    echo "    <th width=\"40%\">";
+    echo "        <h4>Autonomous</h4>";
+    echo "        <p>" . strtoupper($alert["threattype"][0]) . substr($alert["threattype"], 1, 100) . "</p>";
+    echo "    </th>";
+    echo "    <th width=\"25%\">";
+    echo "        <p>" . $alert["strength"] . "% signal</p>";
+    echo "        <p>" . strtotime($alert["lastseen"]) - strtotime($alert["firstseen"]) . " seconds</p>";
+    echo "    </th>";
+    echo "    <th width=\"25%\">";
+    echo "        <p>" . $alert["company"] . "</p>";
+    echo "        <p>" . $alert["name"] . "</p>";
+    echo "    </th>";
+    echo "</tr></table>";
+}
 
 
 // Display Bluetooth alerts.
-// Purple
+// Pink
+foreach ($last_alert["bluetooth"] as $alert) { // Iterate through each Bluetooth alert.
+    echo "<table class=\"alert pink\"><tr>";
+    echo "    <th width=\"5%\"><img src=\"img/alerts/bluetooth.svg\" height=\"50px\"></th>";
+    echo "    <th width=\"35%\">";
+    echo "        <h4>Bluetooth</h4>";
+    if ($alert["blacklist"] == true) {
+        echo "        <p>Blacklist</p>";
+    } else {
+        echo "        <p>Following</p>";
+    }
+    echo "    </th>";
+    echo "    <th width=\"40%\">";
+    echo "        <p>" . $alert["name"] . "</p>";
+    echo "        <p>" . $alert["address"] . "</p>";
+    echo "    </th>";
+    echo "    <th width=\"20%\">";
+    echo "        <p>" . $alert["distance_followed"] . " miles</p>";
+    echo "        <p>" . $alert["lastseentime"] - $alert["firstseentime"] . " seconds</p>";
+    echo "    </th>";
+    echo "</tr></table>";
+}
+
 
 
 // Display traffic camera alerts.
@@ -75,28 +114,45 @@ foreach ($last_alert["gps"] as $key => $alert) { // Iterate through each time-ba
 foreach ($last_alert["traffic_camera"] as $key => $alert) { // Iterate through each time-based attention alert.
     echo "<table class=\"alert blue\"><tr>";
     echo "    <th width=\"5%\"><img src=\"img/alerts/trafficamera.svg\" height=\"50px\"></th>";
-    echo "    <th width=\"5%\" angle=\"30deg\"><img src=\"img/arrow.svg\" style=\"height:50px;transform: rotate(" . $alert["bearing"] . "deg);\"></th>";
-    echo "    <th width=\"40%\">";
+    echo "    <th width=\"5%\"><img src=\"img/arrow.svg\" style=\"height:50px;transform: rotate(" . $alert["direction"] . "deg);\"></th>";
+    echo "    <th width=\"35%\">";
     echo "        <h4>Traffic Camera</h4>";
     if ($alert["type"] == "speed") {
         echo "        <p>Speed Camera</p>";
+        echo "    </th>";
+        echo "    <th width=\"20%\">";
+        echo "        <p>" . round($alert["dst"]*100)/100 . " miles</p>";
+        if ($alert["spd"] !== null and $alert["spd"] > 0) { // Check to see if this camera has speed limit information.
+            echo "        <p>" . round($alert["spd"]) . " mph limit</p>";
+        } else {
+            echo "        <p>Unknown limit</p>";
+        }
+        echo "    </th>";
+        echo "    <th width=\"35%\">";
+        if ($alert["spd"] !== null and $alert["spd"] > 0) { // Check to see if this camera has street information.
+            echo "        <p>" . $alert["str"] . "</p>";
+        }
+        echo "    </th>";
     } else if ($alert["type"] == "redlight") {
         echo "        <p>Red Light Camera</p>";
+        echo "    </th>";
+        echo "    <th width=\"55%\">";
+        echo "        <p>" . round($alert["dst"]*100)/100 . " miles</p>";
+        echo "        <p>" . $alert["str"] . "</p>";
     } else if ($alert["type"] == "misc") {
         echo "        <p>Miscellaneous Camera</p>";
+        echo "    </th>";
+        echo "    <th width=\"55%\">";
+        echo "        <p>" . round($alert["dst"]*100)/100 . " miles</p>";
+        echo "        <p>" . $alert["str"] . "</p>";
     } else {
         echo "        <p>Unknown Camera</p>";
+        echo "    </th>";
+        echo "    <th width=\"55%\">";
+        echo "        <p>" . round($alert["dst"]*100)/100 . " miles</p>";
+        echo "        <p>" . $alert["str"] . "</p>";
     }
-    echo "    </th>";
-    echo "    <th width=\"50%\">";
-    echo "        <p>" . round($alert["dst"]*100)/100 . " miles</p>";
-    if ($alert["spd"] !== null and $alert["spd"] > 0) { // Check to see if this camera has speed limit information.
-        echo "        <p>" . round($alert["spd"]) . " mph limit</p>";
-    } else {
-        echo "        <p>Unknown limit</p>";
-    }
-    echo "    </th>";
-    echo "</tr></table>";
+    echo "</th></tr></table>";
 }
 
 
@@ -106,7 +162,7 @@ foreach ($last_alert["traffic_camera"] as $key => $alert) { // Iterate through e
 foreach ($last_alert["aircraft"] as $key => $alert) { // Iterate through each time-based attention alert.
     echo "<table class=\"alert cyan\"><tr>";
     echo "    <th width=\"5%\"><img src=\"img/alerts/aircraft.svg\" style=\"height:50px;transform:rotate(" . $alert["relativeheading"] . "deg);\"></th>";
-    echo "    <th width=\"5%\" angle=\"30deg\"><img src=\"img/arrow.svg\" style=\"height:50px;transform: rotate(" . $alert["direction"] . "deg);\"></th>";
+    echo "    <th width=\"5%\"><img src=\"img/arrow.svg\" style=\"height:50px;transform: rotate(" . $alert["direction"] . "deg);\"></th>";
     echo "    <th width=\"40%\">";
     echo "        <h4>Aircraft</h4>";
     echo "    </th>";
@@ -129,7 +185,7 @@ foreach ($last_alert["aircraft"] as $key => $alert) { // Iterate through each ti
 foreach ($last_alert["alpr"] as $key => $alert) { // Iterate through each time-based attention alert.
     echo "<table class=\"alert purple\"><tr>";
     echo "    <th width=\"5%\"><img src=\"img/alerts/alpr.svg\" style=\"height:50px;transform:rotate(" . $alert["relativefacing"] . "deg);\"></th>";
-    echo "    <th width=\"5%\" angle=\"30deg\"><img src=\"img/arrow.svg\" style=\"height:50px;transform: rotate(" . $alert["direction"] . "deg);\"></th>";
+    echo "    <th width=\"5%\"><img src=\"img/arrow.svg\" style=\"height:50px;transform: rotate(" . $alert["direction"] . "deg);\"></th>";
     echo "    <th width=\"40%\">";
     echo "        <h4>ALPR Camera</h4>";
     echo "    </th>";

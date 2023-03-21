@@ -21,8 +21,6 @@ include "./utils.php";
             <a class="button" role="button" href="./logout.php">Logout</a>
             <a class="button" role="button" href="./settings.php">Settings</a><br>
         </div>
-        <h1><?php echo $config["product_name"]; ?></h1>
-        <h2>Dashboard</h2>
         <noscript><p class="error">Your browser does not appear to have JavaScript enabled. <?php echo $config["product_name"]  ?> requires JavaScript to function.</p></noscript>
         <?php
         verify_permissions($config); // Verify that PHP has all of the appropriate permissions.
@@ -57,8 +55,8 @@ include "./utils.php";
         }
         ?>
         <main>
+            <br><hr><br>
             <div class="display">
-                <h3>Control</h3>
                 <?php
                 if (is_alive($config) == true) {
                     $start_button = '<a class="button" role="button" id="startbutton" style="color:#aaaaaa" role="button" href="#">Start</a>';
@@ -74,10 +72,7 @@ include "./utils.php";
                 <br><br>
                 <p>The last instance heartbeat was <b id="lastheartbeatdisplay">X</b> seconds ago.</p>
             </div>
-            <div class="display">
-                <h3>Alerts</h3>
-                <div id="alertsframe"></div>
-            </div>
+            <div id="alertsframe"></div>
         </main>
     </body>
     <script>
