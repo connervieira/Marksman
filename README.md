@@ -11,7 +11,7 @@ Assassin is a platform built to integrate devices and sensors in an automotive c
 
 ### Traffic Camera Demonstration
 
-Below is an example situation, depicting a car travelling down a road (yellow arrow) towards a speed camera (red dot), which a red-light camera nearby (green dot).
+Below is an example situation, depicting a car travelling down a road (yellow arrow) towards a speed camera (red dot), with a red-light camera nearby (green dot).
 ![A screenshot of a map, depicting an arrow approaching two marks, indicating traffic cameras.](./screenshots/trafficcamerademo/map.png)
 
 Below is the information displayed by the Assassin terminal interface.
@@ -45,4 +45,4 @@ Regardless of whether you're using Marksman on a laptop or smartphone, the inter
 
 ### Standalone
 
-Despite integrating with Assassin, Marksman is an independent program. This means it can be closed during use without effecting the operating of Assassin behind the scenes.
+Despite integrating with Assassin, Marksman is an independent program. This means it can be closed during use without operation of Assassin in the background.
