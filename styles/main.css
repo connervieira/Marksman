@@ -1,0 +1,89 @@
+p, li, span, noscript, h1, h2, h3, h4, h5, h6, label {
+    font-family: LatoWebMedium;
+}
+
+h1 { font-size: 3rem; }
+h2 { font-size: 2.5rem; }
+h3 { font-size: 2rem; }
+h4 { font-size: 1.6rem; }
+h5 { font-size: 1.4rem; }
+h6 { font-size: 1.2rem; }
+
+
+b {
+    font-family: LatoWebBold;
+}
+
+select, input {
+    border-radius: 10px;
+    padding:5px;
+}
+
+body {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 10%;
+    padding-right: 10%;
+    text-align: center;
+}
+
+a {
+    color: inherit;
+    text-decoration: underline;
+    font-family: LatoWebBold;
+}
+
+table {
+    width:100%;
+}
+table p, table h4 {
+    margin:0px;
+}
+
+.button {
+    margin: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+}
+
+.navbar {
+    width: 100%;
+    text-align: left;
+}
+
+.logo {
+    height: 5rem;
+    width: 150px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.buffer {
+    margin-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 30px;
+    padding-left: 5%;
+    padding-right: 5%;
+    border-radius: 15px;
+}
+.compactinput {
+    width: 50px;
+}
+.error {
+    color: #ff0000;
+}
+
+
+.alert {
+    padding: 0px;
+    margin: 10px;
+    border-radius: 15px;
+    color: #ffffff;
+}
+.yellow { background-color: #ca9000; }
+.orange { background-color: #cc5500; }
+.blue { background-color: #0000cc; }
+.cyan { background-color: #0099cc; }
+.purple { background-color: #9900cc; }
+.green { background-color: #00aa00; }

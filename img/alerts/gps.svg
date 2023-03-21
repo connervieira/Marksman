@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="512mm"
+   height="512mm"
+   viewBox="0 0 1814.1732 1814.1732"
+   id="svg8185"
+   version="1.1"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   sodipodi:docname="gps.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <title
+     id="title4137">Location (GPS) Symbol</title>
+  <defs
+     id="defs8187" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.20466589"
+     inkscape:cx="302.93275"
+     inkscape:cy="78.176192"
+     inkscape:document-units="mm"
+     inkscape:current-layer="g8181"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1106"
+     inkscape:window-height="655"
+     inkscape:window-x="646"
+     inkscape:window-y="740"
+     inkscape:window-maximized="0"
+     inkscape:pagecheckerboard="1" />
+  <metadata
+     id="metadata8190">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Location (GPS) Symbol</dc:title>
+        <cc:license
+           rdf:resource="http://artlibre.org/licence/lal" />
+        <dc:source>https://openclipart.org/user-detail/joede</dc:source>
+        <dc:description>A simple &quot;Location&quot; or &quot;GPS&quot; symbol for designing keypad buttons</dc:description>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/by-sa/3.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Notice" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Attribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#ShareAlike" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-248.39789,-451.28461)">
+    <g
+       transform="matrix(26.96241,0,0,26.851347,-22756.553,-23957.422)"
+       id="g8181"
+       style="stroke-width:0.0371653">
+      <path
+         sodipodi:nodetypes="sscssccccc"
+         inkscape:connector-curvature="0"
+         id="path8166"
+         d="m 886.93221,912.68589 c -14.2263,-0.0424 -17.80713,11.06036 -17.79493,17.62109 0.0264,14.14686 7.26836,24.97834 17.9668,42.63281 10.45174,-17.84361 17.4922,-28.45812 17.49219,-42.58008 0,-6.97123 -3.43777,-17.63142 -17.66406,-17.67382 z m -0.17188,8.93359 c 4.89239,-6.1e-4 8.85891,3.96503 8.85938,8.85742 -4.7e-4,4.89239 -3.96699,8.85803 -8.85938,8.85742 -4.89162,-4.7e-4 -8.85695,-3.9658 -8.85742,-8.85742 4.7e-4,-4.89162 3.9658,-8.85695 8.85742,-8.85742 z"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    </g>
+  </g>
+</svg>
