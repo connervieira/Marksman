@@ -45,4 +45,4 @@ Regardless of whether you're using Marksman on a laptop or smartphone, the inter
 
 ### Standalone
 
-Despite integrating with Assassin, Marksman is an independent program. This means it can be closed during use without operation of Assassin in the background.
+Despite integrating with Assassin, Marksman is an independent program. This means it can be closed during use while Assassin continues to run in the background.
