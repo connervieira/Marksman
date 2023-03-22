@@ -3,6 +3,11 @@
 A graphical interface for [Assassin](https://v0lttech.com/assassin.php).
 
 
+## Installing
+
+Marksman can be downloaded at <https://v0lttech.com/marksman.php>. For installation instructions, see the [DOCUMENTATION.md](DOCUMENTATION.md) file.
+
+
 ## Description
 
 Assassin is a platform built to integrate devices and sensors in an automotive context. While it's plenty powerful alone, many users find it's command line interface to be limiting. Marksman is a companion tool that aims to be a clean, modern dashboard that displays information directly from Assassin from nearly any device with a web browser.
@@ -45,4 +50,4 @@ Regardless of whether you're using Marksman on a laptop or smartphone, the inter
 
 ### Standalone
 
-Despite integrating with Assassin, Marksman is an independent program. This means it can be closed during use while Assassin continues to run in the background.
+Despite integrating with Assassin, Marksman is an independent program. This means it can be closed while Assassin continues to run in the background.

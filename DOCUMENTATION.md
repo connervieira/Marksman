@@ -33,6 +33,9 @@ There are a few dependencies that need to be installed for Marksman to function.
     - Example: `sudo apt-get install php; sudo a2enmod php*`
 3. Restart your web-server host.
     - Example: `sudo apache2ctl restart`
+4. Install Assassin.
+    - Marksman requires Assassin version 2.0 or higher.
+    - Assassin needs to be configured to communicate with external programs.
 
 ### Installation
 
@@ -88,6 +91,7 @@ The "Interface Settings" section contains settings relating to the graphical Mar
 The "Connection Settings" section contains settings relating to the connection between Marksman and the Assassin instance.
 
 - The "Execution User" determines which user on the system Marksman will run the Assassin instance is.
+    - This user does not need administrative privilege.
     - In most situations, this should be your username on the system.
 - The "Instance Directory" setting should be used to specify the absolute directory path of the Marksman instance directory.
 - The "Interface Directory" setting should be used to specify the absolute directory path of the Marksman interface directory.
@@ -96,3 +100,9 @@ The "Connection Settings" section contains settings relating to the connection b
 ## Usage
 
 At this point, Marksman should be fully configured, and there shouldn't be any errors on the main dashboard.
+
+Provided Assassin is already installed and configured, you can use the "Start" and "Stop" buttons in the main interface to control it.
+
+When Assassin is running, the heartbeat timer should reset with each processing cycle. If the heartbeat timer continuously climbs without resetting, then Assassin is not running properly.
+
+Once Assassin is running, any alerts will be display in the bottom portion of the main Marksman dashboard.
