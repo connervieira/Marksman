@@ -86,6 +86,13 @@ if ($_POST["theme"] == "dark"  or $_POST["theme"] == "light") { // Make sure the
                     $valid = false; // Indicate that the configuration is not valid, and shouldn't be saved.
                 }
 
+                if (floatval($_POST["refresh_delay"]) > 0 and floatval($_POST["refresh_delay"]) <= 5000) { // Make sure the refresh delay input is within the expected range.
+                    $config["refresh_delay"] = floatval($_POST["refresh_delay"]); // Save the submitted refresh delay option to the configuration array.
+                } else {
+                    echo "<p class='error'>The specified refresh delay is not within the expected range.</p>";
+                    $valid = false; // Indicate that the configuration is not valid, and shouldn't be saved.
+                }
+
 
 
 
@@ -115,6 +122,7 @@ if ($_POST["theme"] == "dark"  or $_POST["theme"] == "light") { // Make sure the
                 <label for="exec_user">Execution User:</label> <input type="text" id="exec_user" name="exec_user" placeholder="Username" pattern="[a-zA-Z0-9]{1,100}" value="<?php echo $config["exec_user"]; ?>"><br><br>
                 <label for="instance_directory">Instance Directory:</label> <input type="text" id="instance_directory" name="instance_directory" placeholder="/home/assassin/Assassin" value="<?php echo $config["instance_directory"]; ?>"><br><br>
                 <label for="interface_directory">Interface Directory:</label> <input type="text" id="interface_directory" name="interface_directory" placeholder="/home/predator/Instance/" value="<?php echo $config["interface_directory"]; ?>"><br><br>
+                <label for="refresh_delay">Refresh Delay:</label> <input type="number" id="refresh_delay" name="refresh_delay" placeholder="100" step="1" min="1" max="5000" value="<?php echo $config["refresh_delay"]; ?>"> <span>milliseconds</span><br><br>
 
                 <br><br><input type="submit" class="button" value="Submit">
             </form>

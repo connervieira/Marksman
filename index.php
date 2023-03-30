@@ -103,6 +103,6 @@ include "./utils.php";
             }
         }
 
-        setInterval(() => { fetch_info(); }, 100); // Execute the instance fetch script every 500 milliseconds.
+        setInterval(() => { fetch_info(); }, <?php echo floatval($config["refresh_delay"]); ?>); // Execute the instance fetch script at a regular timed interval.
     </script>
 </html>

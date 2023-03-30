@@ -161,13 +161,25 @@ foreach ($last_alert["traffic_camera"] as $key => $alert) { // Iterate through e
 // Cyan
 foreach ($last_alert["aircraft"] as $key => $alert) { // Iterate through each time-based attention alert.
     echo "<table class=\"alert cyan\"><tr>";
-    echo "    <th width=\"5%\"><img src=\"img/alerts/aircraft.svg\" style=\"height:50px;transform:rotate(" . $alert["relativeheading"] . "deg);\"></th>";
-    echo "    <th width=\"5%\"><img src=\"img/arrow.svg\" style=\"height:50px;transform: rotate(" . $alert["direction"] . "deg);\"></th>";
+    if ($alert["relativeheading"] == 0) {
+        echo "    <th width=\"5%\"><img src=\"img/question.svg\" style=\"height:50px;\"></th>";
+    } else {
+        echo "    <th width=\"5%\"><img src=\"img/alerts/aircraft.svg\" style=\"height:50px;transform:rotate(" . $alert["relativeheading"] - 90 . "deg);\"></th>";
+    }
+    if ($alert["latitude"] == 0 and $alert["longitude"] == 0) {
+        echo "    <th width=\"5%\"><img src=\"img/question.svg\" style=\"height:50px;\"></th>";
+    } else {
+        echo "    <th width=\"5%\"><img src=\"img/arrow.svg\" style=\"height:50px;transform: rotate(" . $alert["direction"] . "deg);\"></th>";
+    }
     echo "    <th width=\"40%\">";
     echo "        <h4>Aircraft</h4>";
     echo "    </th>";
     echo "    <th width=\"25%\">";
-    echo "        <p>" . round($alert["distance"]*100)/100 . " miles</p>";
+    if ($alert["latitude"] == 0 and $alert["longitude"] == 0) {
+        echo "        <p>Distance unknown</p>";
+    } else {
+        echo "        <p>" . round($alert["distance"]*100)/100 . " miles</p>";
+    }
     echo "        <p>" . $alert["altitude"] . " feet</p>";
     echo "    </th>";
     echo "    <th width=\"25%\">";
