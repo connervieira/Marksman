@@ -42,8 +42,6 @@ function verify_permissions($config) {
     $command_output = shell_exec($verify_command); // Execute the command, and record its output.
     $command_output = trim($command_output); // Remove whitespaces from the end and beginning of the command output.
 
-    $instance_configuration_file = $config["instance_directory"] . "/config.json";
-
     if ($command_output !== "verify") { // Check to see if the command output differs from the expected output.
         echo "<p class=\"error\">PHP does not have the necessary permissions to manage this system as '" . $config["exec_user"] . "' using the '" . shell_exec("whoami") . "' user.</p>"; // Display an error briefly explaining the problem.
         exit(); // Terminate the script.
@@ -52,18 +50,13 @@ function verify_permissions($config) {
 
     if (is_writable("./") == false) { // Check to se if the controller interface's root directory is writable.
         echo "<p class=\"error\">The " . $config["product_name"] . " directory is not writable. Please verify the permissions of the " . getcwd() . " directory.</p>";
-    } else if (is_writable("./start.sh") == false) { // Check to see if the controller interface's start script is writable.
+    } else if (is_writable("./start.sh") == false and file_exists("./start.sh") == true) { // Check to see if the controller interface's start script is writable.
         echo "<p class=\"error\">The start.sh script in the " . getcwd() . " directory is not writable.</p>";
     }
 
     if (is_dir($config["instance_directory"]) == false) { // Check to see if the root Assassin instance directory exists.
         echo "<p class=\"error\">The instance directory doesn't appear to exist at " . $config["instance_directory"] . ". Please adjust the controller configuration.</p>";
         echo "<a class=\"button\" href=\"./settings.php\">Settings</a>";
-    } else if (file_exists($instance_configuration_file) == false) { // Check to see if the instance configuration file exists.
-        echo "<p class=\"error\">The instance configuration couldn't be located at " . $instance_configuration_file . ". Please verify that the interface configuration points to the correct instance root directory.</p>";
-        echo "<a class=\"button\" href=\"./settings.php\">Settings</a>";
-    } else if (is_writable($instance_configuration_file) == false) { // Check to see if the instance configuration file is writable.
-        echo "<p class=\"error\">The instance configuration isn't writable. Please verify that the instance configuration file at " . $instance_configuration_file . " has the correct permissions to be modified by external programs.</p>";
     }
 
 }

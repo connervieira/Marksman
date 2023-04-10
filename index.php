@@ -26,10 +26,12 @@ include "./utils.php";
         verify_permissions($config); // Verify that PHP has all of the appropriate permissions.
 
         $action = $_GET["action"];
-        if ($action == "start") {
+        if (is_writable(".")) { // Check to see if the controller directory is writable.
             if (!file_exists("./start.sh")) { // Check to see if the script hasn't been created yet.
                 file_put_contents("./start.sh", ""); // Create the start script.
             }
+        }
+        if ($action == "start") {
             if (is_writable("./start.sh")) {
                 file_put_contents("./start.sh", "cd " . $config["instance_directory"] . "; python3 " . $config["instance_directory"] . "/main.py &"); // Update the start script.
             } else {

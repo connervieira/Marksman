@@ -39,7 +39,7 @@ foreach ($last_alert["gps"] as $key => $alert) { // Iterate through each GPS ale
         echo "        <p>Over-Speed</p>";
         echo "    </th>";
         echo "    <th width=\"50%\">";
-        echo "        <p>The calculated GPS speed is <b>" . $alert["speed"] . " mph</b>.</p>";
+        echo "        <p>The calculated GPS speed is <b>" . round($alert["speed"]*100)/100 . " mph</b>.</p>";
         echo "    </th>";
     } else if ($key == "nodata") {
         echo "    <th width=\"45%\">";
@@ -48,6 +48,14 @@ foreach ($last_alert["gps"] as $key => $alert) { // Iterate through each GPS ale
         echo "    </th>";
         echo "    <th width=\"50%\">";
         echo "        <p>The GPS is not returning data.</p>";
+        echo "    </th>";
+    } else if ($key == "frozen") {
+        echo "    <th width=\"45%\">";
+        echo "        <h4>GPS Alert</h4>";
+        echo "        <p>Frozen</p>";
+        echo "    </th>";
+        echo "    <th width=\"50%\">";
+        echo "        <p>The GPS appear to be frozen.</p>";
         echo "    </th>";
     } else {
         echo "    <th width=\"45%\">";
