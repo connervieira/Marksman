@@ -23,5 +23,7 @@ March 22nd, 2023
 - Updated GPS alert handling.
     - GPS over-speed alerts are now rounded to 2 decimal places.
     - Added support for frozen GPS alerts.
+    - Added support for GPS diagnostic alerts.
 - The start.sh script placeholder is now created when the index pages loads, rather than the first time the "Start" button is pressed.
 - Refined permissions verification process.
+- Fixed a problem where Marksman would encounter a fatal error if the Assassin interface directory was missing.

@@ -33,7 +33,20 @@ foreach ($last_alert["attention"] as $key => $alert) { // Iterate through each a
 foreach ($last_alert["gps"] as $key => $alert) { // Iterate through each GPS alert.
     echo "<table class=\"alert green\"><tr>";
     echo "    <th width=\"5%\"><img src=\"img/alerts/gps.svg\" height=\"50px\"></th>";
-    if ($key == "maxspeed") {
+    if ($key == "diagnostic") {
+        echo "    <th width=\"45%\">";
+        echo "        <h4>GPS Info</h4>";
+        echo "        <p>Diagnostic</p>";
+        echo "    </th>";
+        echo "    <th width=\"25%\">";
+        echo "        <p>" . $alert["lat"] . ", " . $alert["lon"] . "</p>";
+        echo "        <p>" . round($alert["hdg"]) . "° at " . round(floatval($alert["alt"])) . " meters</p>";
+        echo "    </th>";
+        echo "    <th width=\"25%\">";
+        echo "        <p>" . round(floatval($alert["spd"])*2.236936*100)/100 . " mph</p>";
+        echo "        <p>" . $alert["sat"] . " satellites</p>";
+        echo "    </th>";
+    } else if ($key == "maxspeed") {
         echo "    <th width=\"45%\">";
         echo "        <h4>GPS Alert</h4>";
         echo "        <p>Over-Speed</p>";
