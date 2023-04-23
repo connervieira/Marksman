@@ -185,7 +185,7 @@ foreach ($last_alert["aircraft"] as $key => $alert) { // Iterate through each ti
     if ($alert["relativeheading"] == 0) {
         echo "    <th width=\"5%\"><img src=\"img/question.svg\" style=\"height:50px;\"></th>";
     } else {
-        echo "    <th width=\"5%\"><img src=\"img/alerts/aircraft.svg\" style=\"height:50px;transform:rotate(" . $alert["relativeheading"] - 90 . "deg);\"></th>";
+        echo "    <th width=\"5%\"><img src=\"img/alerts/aircraft.svg\" style=\"height:50px;transform:rotate(" . ($alert["relativeheading"] - 90) . "deg);\"></th>";
     }
     if ($alert["latitude"] == 0 and $alert["longitude"] == 0) {
         echo "    <th width=\"5%\"><img src=\"img/question.svg\" style=\"height:50px;\"></th>";
