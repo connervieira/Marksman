@@ -83,6 +83,37 @@ foreach ($last_alert["gps"] as $key => $alert) { // Iterate through each GPS ale
 }
 
 
+
+
+// Display Predator alerts.
+// Yellow
+foreach ($last_alert["predator"] as $plate => $triggers) { // Iterate through each alert in the Predator integration alerts.
+    echo "<table class=\"alert yellow\"><tr>";
+    echo "    <th width=\"5%\"><img src=\"img/alerts/predator.svg\" height=\"50px\"></th>";
+    echo "    <th width=\"35%\">";
+    echo "        <h4>Predator</h4>";
+    echo "        <p>ALPR Alert</p>";
+    echo "    </th>";
+    echo "    <th width=\"25%\">";
+    echo "        <p>" . $plate . "</p>";
+    echo "    </th>";
+    if (sizeof($triggers) <= 1) {
+        echo "<th width=\"35%\">";
+        foreach ($triggers as $rule => $info) {
+            echo "<p>" . $rule . "</p>";
+        }
+        echo "</th>";
+    } else if (sizeof($triggers) == 2) {
+        echo "<th width=\"35%\">";
+        foreach ($triggers as $rule => $info) {
+            echo "<p>" . $rule . "</p>";
+        }
+        echo "</th>";
+    }
+    echo "</tr></table>";
+}
+
+
 // Display drone alerts.
 // Magenta
 foreach ($last_alert["drone"] as $alert) { // Iterate through each automonous threat alert.
