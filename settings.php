@@ -213,6 +213,11 @@ if ($_POST["theme"] == "dark"  or $_POST["theme"] == "light") { // Make sure the
                             <label for="general>alpr_alerts>direction_threshold">Direction Threshold:</label> <input type="number" id="general>alpr_alerts>direction_threshold" name="general>alpr_alerts>direction_threshold" step="1" placeholder="20" min="0" max="180" value="<?php echo $instance_config["general"]["alpr_alerts"]["direction_threshold"] ?>"> <span>degrees</span><br><br>
                         </div>
                         <div class="buffer">
+                            <h4>Predator Integration</h4>
+                            <label for="general>predator_integration>enabled">Enabled:</label> <input type="checkbox" id="general>predator_integration>enabled" name="general>predator_integration>enabled" <?php if ($instance_config["general"]["predator_integration"]["enabled"]) { echo "checked"; } ?>><br><br>
+                            <label for="general>predator_integration>latch_time">Alert Latch Time:</label> <input type="number" min="0" max="600" step="1" placeholder="10" id="general>predator_integration>latch_time" name="general>predator_integration>latch_time" value="<?php echo $instance_config["general"]["predator_integration"]["latch_time"]; ?>"> <span>seconds</span><br><br>
+                        </div>
+                        <div class="buffer">
                             <h4>ADS-B Aircraft Monitoring</h4>
                             <label for="general>adsb_alerts>enabled">Enabled:</label> <input type="checkbox" id="general>adsb_alerts>enabled" name="general>adsb_alerts>enabled" <?php if ($instance_config["general"]["adsb_alerts"]["enabled"]) { echo "checked"; } ?>><br><br>
                             <label for="general>adsb_alerts>minimum_vehicle_speed">Minimum Vehicle Speed:</label> <input type="number" id="general>adsb_alerts>minimum_vehicle_speed" name="general>adsb_alerts>minimum_vehicle_speed" step="1" placeholder="20" min="0" max="200" value="<?php echo $instance_config["general"]["adsb_alerts"]["minimum_vehicle_speed"] ?>"> <span>m/s</span><br><br>
