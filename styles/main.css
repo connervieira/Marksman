@@ -81,11 +81,12 @@ table p, table h4 {
     border-radius: 15px;
     color: #ffffff;
 }
-.yellow { background-color: #ca9000; }
+.red { background-color: #ca0000; }
 .orange { background-color: #cc5500; }
-.blue { background-color: #0000cc; }
-.cyan { background-color: #0099cc; }
-.purple { background-color: #9900cc; }
-.magenta { background-color: #aa00cc; }
-.pink { background-color: #cc00cc; }
+.yellow { background-color: #ca9000; }
 .green { background-color: #00aa00; }
+.cyan { background-color: #0099cc; }
+.blue { background-color: #0000cc; }
+.magenta { background-color: #aa00cc; }
+.purple { background-color: #9900cc; }
+.pink { background-color: #cc00cc; }

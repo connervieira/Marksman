@@ -86,9 +86,9 @@ foreach ($last_alert["gps"] as $key => $alert) { // Iterate through each GPS ale
 
 
 // Display Predator alerts.
-// Yellow
+// Red
 foreach ($last_alert["predator"] as $plate => $triggers) { // Iterate through each alert in the Predator integration alerts.
-    echo "<table class=\"alert yellow\"><tr>";
+    echo "<table class=\"alert red\"><tr>";
     echo "    <th width=\"5%\"><img src=\"img/alerts/predator.svg\" height=\"50px\"></th>";
     echo "    <th width=\"35%\">";
     echo "        <h4>Predator</h4>";
