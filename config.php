@@ -20,6 +20,7 @@ if (file_exists($config_database_name) == false) { // Check to see if the databa
     $config["instance_directory"] = "/home/assassin/Software/Assassin/instance"; // This defines where the Assassin directory can be found.
     $config["interface_directory"] = "/home/assassin/Software/Assassin/interface"; // This defines where Assassin's interface directory can be found.
     $config["refresh_delay"] = 100; // This determines how many milliseconds the interface will wait between refreshes.
+    $config["precision"]["coordinates"] = 4; // This determines how many decimal places coordinates will be shown to.
 
     fwrite($configuration_database_file, serialize($config)); // Set the contents of the database file to the placeholder configuration.
     fclose($configuration_database_file); // Close the database file.

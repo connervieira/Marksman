@@ -1,5 +1,7 @@
 <?php
 include "./config.php";
+include "./utils.php";
+
 $alerts_file_path = $config["interface_directory"] . "/alerts.json";
 
 if (is_dir($config["interface_directory"]) == true) { // Check to make sure the specified interface directory exists.
@@ -34,12 +36,12 @@ foreach ($last_alert["gps"] as $key => $alert) { // Iterate through each GPS ale
     echo "<table class=\"alert green\"><tr>";
     echo "    <th width=\"5%\"><img src=\"img/alerts/gps.svg\" height=\"50px\"></th>";
     if ($key == "diagnostic") {
-        echo "    <th width=\"45%\">";
+        echo "    <th width=\"35%\">";
         echo "        <h4>GPS Info</h4>";
         echo "        <p>Diagnostic</p>";
         echo "    </th>";
-        echo "    <th width=\"25%\">";
-        echo "        <p>" . $alert["lat"] . ", " . $alert["lon"] . "</p>";
+        echo "    <th width=\"35%\">";
+        echo "        <p>" . decimal_precision($alert["lat"], $config) . ", " . decimal_precision($alert["lon"], $config) . "</p>";
         echo "        <p>" . round($alert["hdg"]) . "° at " . round(floatval($alert["alt"])) . " meters</p>";
         echo "    </th>";
         echo "    <th width=\"25%\">";
