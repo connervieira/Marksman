@@ -56,8 +56,19 @@ function verify_permissions($config) {
         echo "<p class=\"error\">The start.sh script in the " . getcwd() . " directory is not writable.</p>";
     }
 
+    $instance_configuration_path = $config["instance_directory"] . "/config.json"; // This is the file path to the configuration file of the Assassin instance.
     if (is_dir($config["instance_directory"]) == false) { // Check to see if the root Assassin instance directory exists.
         echo "<p class=\"error\">The instance directory doesn't appear to exist at " . $config["instance_directory"] . ". Please adjust the controller configuration.</p>";
+        echo "<a class=\"button\" href=\"./settings.php\">Settings</a>";
+    } else if (file_exists($instance_configuration_path) == false) { // Check to see if the instance configuration file exists.
+        echo "<p class=\"error\">The instance configuration file doesn't appear to exist at " . $instance_configuration_path . ". Please make sure the 'Instance Directory' points to a valid instance of Assassin.</p>";
+        echo "<a class=\"button\" href=\"./settings.php\">Settings</a>";
+    } else if (is_writable($instance_configuration_path) == false) { // Check to see if the instance configuration file is writable.
+        echo "<p class=\"error\">The instance configuration file at " . $instance_configuration_path . " doesn't appear to be writable.</p>";
+        echo "<a class=\"button\" href=\"./settings.php\">Settings</a>";
+    }
+    if (is_dir($config["interface_directory"]) == false) { // Check to see if the Assassin interface directory exists.
+        echo "<p class=\"error\">The interface directory doesn't appear to exist at " . $config["interface_directory"] . ". Please adjust the controller configuration.</p>";
         echo "<a class=\"button\" href=\"./settings.php\">Settings</a>";
     }
 
