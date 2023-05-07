@@ -93,6 +93,13 @@ if ($_POST["theme"] == "dark"  or $_POST["theme"] == "light") { // Make sure the
                     $valid = false; // Indicate that the configuration is not valid, and shouldn't be saved.
                 }
 
+                if (intval($_POST["precision_coordinates"]) >= 0 and intval($_POST["precision_coordinates"]) <= 10) { // Make sure the coordinate precision input is within the expected range.
+                    $config["precision"]["coordinates"] = intval($_POST["precision_coordinates"]); // Save the submitted coordinate precision option to the configuration array.
+                } else {
+                    echo "<p class='error'>The specified coordinate precision is not within the expected range.</p>";
+                    $valid = false; // Indicate that the configuration is not valid, and shouldn't be saved.
+                }
+
 
 
 
@@ -123,6 +130,7 @@ if ($_POST["theme"] == "dark"  or $_POST["theme"] == "light") { // Make sure the
                 <label for="instance_directory">Instance Directory:</label> <input type="text" id="instance_directory" name="instance_directory" placeholder="/home/assassin/Assassin" value="<?php echo $config["instance_directory"]; ?>"><br><br>
                 <label for="interface_directory">Interface Directory:</label> <input type="text" id="interface_directory" name="interface_directory" placeholder="/home/predator/Instance/" value="<?php echo $config["interface_directory"]; ?>"><br><br>
                 <label for="refresh_delay">Refresh Delay:</label> <input type="number" id="refresh_delay" name="refresh_delay" placeholder="100" step="1" min="1" max="5000" value="<?php echo $config["refresh_delay"]; ?>"> <span>milliseconds</span><br><br>
+                <label for="precision_coordinates">Coordinate Precision:</label> <input type="number" id="precision_coordinates" name="precision_coordinates" placeholder="4" step="1" min="0" max="10" value="<?php echo $config["precision"]["coordinates"]; ?>"> <span>places</span><br><br>
 
                 <br><br><input type="submit" class="button" value="Submit">
             </form>

@@ -63,4 +63,11 @@ function verify_permissions($config) {
 
 }
 
+
+
+// The `decimal_precision` function rounds off a given decimal number to a given number of decimal points.
+function decimal_precision($number, $config) {
+    return round($number * (10**$config["precision"]["coordinates"])) / (10**$config["precision"]["coordinates"]);
+}
 ?>
+
