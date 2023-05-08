@@ -29,3 +29,4 @@ March 22nd, 2023
 - Fixed a problem where Marksman would encounter a fatal error if the Assassin interface directory was missing.
 - The connected Assassin instance configuration can now be modified directly from the Marksman settings page.
     - Commonly modified settings can be changed from the graphical interface.
+- Made the interface more compact for better usability on smaller displays.

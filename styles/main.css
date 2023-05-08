@@ -24,8 +24,8 @@ select, input {
 body {
     padding-top: 50px;
     padding-bottom: 50px;
-    padding-left: 10%;
-    padding-right: 10%;
+    padding-left: 1%;
+    padding-right: 1%;
     text-align: center;
 }
 
@@ -36,7 +36,7 @@ a {
 }
 
 table {
-    width:100%;
+    width:98%;
 }
 table p, table h4 {
     margin:0px;
@@ -62,11 +62,11 @@ table p, table h4 {
 }
 
 .buffer {
-    margin-bottom: 20px;
-    padding-top: 10px;
-    padding-bottom: 30px;
-    padding-left: 5%;
-    padding-right: 5%;
+    margin-bottom: 12px;
+    padding-top: 7px;
+    padding-bottom: 20px;
+    padding-left: 2%;
+    padding-right: 2%;
     border-radius: 15px;
 }
 .compactinput {
