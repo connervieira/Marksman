@@ -14,7 +14,7 @@ March 22nd, 2023
 
 ## Version 1.0
 
-### Name Pending
+### First Stable Release
 
 *Release date to be determined*
 
@@ -27,3 +27,5 @@ March 22nd, 2023
 - The start.sh script placeholder is now created when the index pages loads, rather than the first time the "Start" button is pressed.
 - Refined permissions verification process.
 - Fixed a problem where Marksman would encounter a fatal error if the Assassin interface directory was missing.
+- The connected Assassin instance configuration can now be modified directly from the Marksman settings page.
+    - Commonly modified settings can be changed from the graphical interface.
