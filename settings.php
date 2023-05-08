@@ -146,19 +146,111 @@ if ($_POST["theme"] == "dark"  or $_POST["theme"] == "light") { // Make sure the
             <div class="buffer">
                 <h2>Instance Settings</h2>
                 <form method="post">
+                    <?php
+                        $instance_configuration_path = $config["instance_directory"] . "/config.json"; // This is the file path to the configuration file of the Assassin instance.
+                        $instance_config = json_decode(file_get_contents($config["instance_directory"] . "/config.json"), true);
+
+
+                        if ($_POST["instance"] == "Submit") { // Check to see if the instance settings form was submitted.
+                            // General configuration.
+                            $instance_config["general"]["refresh_delay"] = floatval($_POST["general>refresh_delay"]);
+
+
+                            // GPS alert configuration.
+                            if ($_POST["general>gps>alerts>enabled"] == "on") { $instance_config["general"]["gps"]["alerts"]["enabled"] = true; } else { $instance_config["general"]["gps"]["alerts"]["enabled"] = false; }
+                            $instance_config["general"]["gps"]["alerts"]["look_back"] = intval($_POST["general>gps>alerts>look_back"]);
+
+                            if ($_POST["general>gps>alerts>overspeed>enabled"] == "on") { $instance_config["general"]["gps"]["alerts"]["overspeed"]["enabled"] = true; } else { $instance_config["general"]["gps"]["alerts"]["overspeed"]["enabled"] = false; }
+                            $instance_config["general"]["gps"]["alerts"]["overspeed"]["max_speed"] = floatval($_POST["general>gps>alerts>overspeed>max_speed"]);
+                            if ($_POST["general>gps>alerts>overspeed>prioritize_highest"] == "on") { $instance_config["general"]["gps"]["alerts"]["overspeed"]["prioritize_highest"] = true; } else { $instance_config["general"]["gps"]["alerts"]["overspeed"]["prioritize_highest"] = false; }
+
+                            if ($_POST["general>gps>alerts>no_data>enabled"] == "on") { $instance_config["general"]["gps"]["alerts"]["no_data"]["enabled"] = true; } else { $instance_config["general"]["gps"]["alerts"]["no_data"]["enabled"] = false; }
+                            $instance_config["general"]["gps"]["alerts"]["no_data"]["length"] = intval($_POST["general>gps>alerts>no_data>length"]);
+
+                            if ($_POST["general>gps>alerts>frozen>enabled"] == "on") { $instance_config["general"]["gps"]["alerts"]["frozen"]["enabled"] = true; } else { $instance_config["general"]["gps"]["alerts"]["frozen"]["enabled"] = false; }
+                            $instance_config["general"]["gps"]["alerts"]["frozen"]["length"] = intval($_POST["general>gps>alerts>frozen>length"]);
+
+                            if ($_POST["general>gps>alerts>diagnostic>enabled"] == "on") { $instance_config["general"]["gps"]["alerts"]["diagnostic"]["enabled"] = true; } else { $instance_config["general"]["gps"]["alerts"]["diagnostic"]["enabled"] = false; }
+
+
+                            // Attention monitoring configuration.
+                            if ($_POST["general>attention_monitoring>enabled"] == "on") { $instance_config["general"]["attention_monitoring"]["enabled"] = true; } else { $instance_config["general"]["attention_monitoring"]["enabled"] = false; }
+                            $instance_config["general"]["attention_monitoring"]["reset_time"] = floatval($_POST["general>attention_monitoring>reset_time"]);
+                            $instance_config["general"]["attention_monitoring"]["reset_speed"] = floatval($_POST["general>attention_monitoring>reset_speed"]);
+                            $instance_config["general"]["attention_monitoring"]["triggers"]["time"] = floatval($_POST["general>attention_monitoring>triggers>time"]);
+
+
+                            // Traffic camera alert configuration.
+                            $instance_config["general"]["traffic_camera_alerts"]["loaded_radius"] = floatval($_POST["general>traffic_camera_alerts>loaded_radius"]);
+                            $instance_config["general"]["traffic_camera_alerts"]["alert_range"] = floatval($_POST["general>traffic_camera_alerts>alert_range"]);
+                            if ($_POST["general>traffic_camera_alerts>enabled_types>speed"] == "on") { $instance_config["general"]["traffic_camera_alerts"]["enabled_types"]["speed"] = true; } else { $instance_config["general"]["traffic_camera_alerts"]["enabled_types"]["speed"] = false; }
+                            if ($_POST["general>traffic_camera_alerts>enabled_types>redlight"] == "on") { $instance_config["general"]["traffic_camera_alerts"]["enabled_types"]["redlight"] = true; } else { $instance_config["general"]["traffic_camera_alerts"]["enabled_types"]["redlight"] = false; }
+                            if ($_POST["general>traffic_camera_alerts>enabled_types>misc"] == "on") { $instance_config["general"]["traffic_camera_alerts"]["enabled_types"]["misc"] = true; } else { $instance_config["general"]["traffic_camera_alerts"]["enabled_types"]["misc"] = false; }
+
+
+                            // ALPR alert configuration.
+                            $instance_config["general"]["alpr_alerts"]["loaded_radius"] = floatval($_POST["general>alpr_alerts>loaded_radius"]);
+                            $instance_config["general"]["alpr_alerts"]["alert_range"] = floatval($_POST["general>alpr_alerts>alert_range"]);
+                            $instance_config["general"]["alpr_alerts"]["angle_threshold"] = floatval($_POST["general>alpr_alerts>angle_threshold"]);
+                            $instance_config["general"]["alpr_alerts"]["direction_threshold"] = floatval($_POST["general>alpr_alerts>direction_threshold"]);
+
+
+                            // Predator integration configuration.
+                            if ($_POST["general>predator_integration>enabled"] == "on") { $instance_config["general"]["predator_integration"]["enabled"] = true; } else { $instance_config["general"]["predator_integration"]["enabled"] = false; }
+                            $instance_config["general"]["predator_integration"]["latch_time"] = floatval($_POST["general>predator_integration>latch_time"]);
+
+
+                            // ADS-B alert configuration.
+                            if ($_POST["general>adsb_alerts>enabled"] == "on") { $instance_config["general"]["adsb_alerts"]["enabled"] = true; } else { $instance_config["general"]["adsb_alerts"]["enabled"] = false; }
+                            $instance_config["general"]["adsb_alerts"]["minimum_vehicle_speed"] = floatval($_POST["general>adsb_alerts>minimum_vehicle_speed"]);
+                            $instance_config["general"]["adsb_alerts"]["message_time_to_live"] = floatval($_POST["general>adsb_alerts>message_time_to_live"]);
+                            $instance_config["general"]["adsb_alerts"]["threat_threshold"] = intval($_POST["general>adsb_alerts>threat_threshold"]);
+
+                            $instance_config["general"]["adsb_alerts"]["minimum_aircraft_speed"] = floatval($_POST["general>adsb_alerts>minimum_aircraft_speed"]);
+                            $instance_config["general"]["adsb_alerts"]["maximum_aircraft_speed"] = floatval($_POST["general>adsb_alerts>maximum_aircraft_speed"]);
+
+                            $instance_config["general"]["adsb_alerts"]["minimum_aircraft_altitude"] = floatval($_POST["general>adsb_alerts>minimum_aircraft_altitude"]);
+                            $instance_config["general"]["adsb_alerts"]["maximum_aircraft_altitude"] = floatval($_POST["general>adsb_alerts>maximum_aircraft_altitude"]);
+
+                            $instance_config["general"]["adsb_alerts"]["distance_threshold"] = floatval($_POST["general>adsb_alerts>distance_threshold"]);
+                            $instance_config["general"]["adsb_alerts"]["base_altitude_threshold"] = floatval($_POST["general>adsb_alerts>base_altitude_threshold"]);
+
+
+                            // Weather alert configuration.
+                            if ($_POST["general>weather_alerts>enabled"] == "on") { $instance_config["general"]["weather_alerts"]["enabled"] = true; } else { $instance_config["general"]["weather_alerts"]["enabled"] = false; }
+                            $instance_config["general"]["weather_alerts"]["api_key"] = $_POST["general>weather_alerts>api_key"];
+                            $instance_config["general"]["weather_alerts"]["refresh_interval"] = floatval($_POST["general>weather_alerts>refresh_interval"]);
+
+                            $instance_config["general"]["weather_alerts"]["criteria"]["visibility"]["below"] = floatval($_POST["general>weather_alerts>criteria>visibility>below"]);
+                            $instance_config["general"]["weather_alerts"]["criteria"]["visibility"]["above"] = floatval($_POST["general>weather_alerts>criteria>visibility>above"]);
+
+                            $instance_config["general"]["weather_alerts"]["criteria"]["temperature"]["below"] = floatval($_POST["general>weather_alerts>criteria>temperature>below"]);
+                            $instance_config["general"]["weather_alerts"]["criteria"]["temperature"]["above"] = floatval($_POST["general>weather_alerts>criteria>temperature>above"]);
+
+
+                            // Drone detection configuration.
+                            if ($_POST["general>drone_alerts>enabled"] == "on") { $instance_config["general"]["drone_alerts"]["enabled"] = true; } else { $instance_config["general"]["drone_alerts"]["enabled"] = false; }
+                            $instance_config["general"]["drone_alerts"]["hazard_latch_time"] = floatval($_POST["general>drone_alerts>hazard_latch_time"]);
+
+
+                            // Bluetooth monitoring configuration.
+                            if ($_POST["general>bluetooth_monitoring>enabled"] == "on") { $instance_config["general"]["bluetooth_monitoring"]["enabled"] = true; } else { $instance_config["general"]["bluetooth_monitoring"]["enabled"] = false; }
+                            $instance_config["general"]["bluetooth_monitoring"]["latch_time"] = floatval($_POST["general>bluetooth_monitoring>latch_time"]);
+                            $instance_config["general"]["bluetooth_monitoring"]["scan_time"] = floatval($_POST["general>bluetooth_monitoring>scan_time"]);
+                            $instance_config["general"]["bluetooth_monitoring"]["minimum_following_distance"] = floatval($_POST["general>bluetooth_monitoring>minimum_following_distance"]);
+
+
+
+                            $encoded_instance_config = json_encode($instance_config, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+                            file_put_contents($instance_configuration_path, $encoded_instance_config);
+                        }
+                    ?>
                     <div class="buffer">
                         <h3>General</h3>
                         <label for="general>refresh_delay">Refresh Delay:</label> <input type="number" id="general>refresh_delay" name="general>refresh_delay" placeholder="0.5" step="0.1" min="0" max="60" value="<?php echo $instance_config["general"]["refresh_delay"]; ?>"> <span>seconds</span><br><br>
-                        <br><br><input type="submit" class="button" value="Submit" name="instance">
                     </div>
                     <div class="buffer">
                         <h3>Alerts</h3>
-                        <?php
-                            $instance_configuration_path = $config["instance_directory"] . "/config.json"; // This is the file path to the configuration file of the Assassin instance.
-                            $instance_config = json_decode(file_get_contents($config["instance_directory"] . "/config.json"), true);
-
-                            # TODO: Add instance configuration saving.
-                        ?>
                         <div class="buffer">
                             <h4>GPS</h4>
                             <label for="general>gps>alerts>enabled">Enabled:</label> <input type="checkbox" id="general>gps>alerts>enabled" name="general>gps>alerts>enabled" <?php if ($instance_config["general"]["gps"]["alerts"]["enabled"]) { echo "checked"; } ?>><br><br>
@@ -166,7 +258,7 @@ if ($_POST["theme"] == "dark"  or $_POST["theme"] == "light") { // Make sure the
                             <div class="buffer">
                                 <h5>Over Speed</h5>
                                 <label for="general>gps>alerts>overspeed>enabled">Enabled:</label> <input type="checkbox" id="general>gps>alerts>overspeed>enabled" name="general>gps>alerts>overspeed>enabled" <?php if ($instance_config["general"]["gps"]["alerts"]["overspeed"]["enabled"]) { echo "checked"; } ?>><br><br>
-                                <label for="general>gps>alerts>overspeed>maxspeed">Max Speed:</label> <input type="number" id="general>gps>alerts>overspeed>max_speed" name="general>gps>alerts>overspeed>max_speed" min="0" max="1000" step="1" placeholder="400" value="<?php echo $instance_config["general"]["gps"]["alerts"]["overspeed"]["max_speed"]; ?>"><br><br>
+                                <label for="general>gps>alerts>overspeed>max_speed">Max Speed:</label> <input type="number" id="general>gps>alerts>overspeed>max_speed" name="general>gps>alerts>overspeed>max_speed" min="0" max="1000" step="1" placeholder="400" value="<?php echo $instance_config["general"]["gps"]["alerts"]["overspeed"]["max_speed"]; ?>"><br><br>
                                 <label for="general>gps>alerts>overspeed>prioritize_highest">Prioritize Highest:</label> <input type="checkbox" id="general>gps>alerts>overspeed>prioritize_highest" name="general>gps>alerts>overspeed>prioritize_highest" <?php if ($instance_config["general"]["gps"]["alerts"]["overspeed"]["prioritize_highest"]) { echo "checked"; } ?>><br><br>
                             </div>
                             <div class="buffer">
@@ -248,7 +340,7 @@ if ($_POST["theme"] == "dark"  or $_POST["theme"] == "light") { // Make sure the
                             <div class="buffer">
                                 <h4>Service</h4>
                                 <label for="general>weather_alerts>api_key">API Key:</label> <input type="text" id="general>weather_alerts>api_key" name="general>weather_alerts>api_key" value="<?php echo $instance_config["general"]["weather_alerts"]["api_key"]; ?>"><br><br>
-                                <label for="general>weather_alerts>refresh_interval">Refresh Interval:</label> <input type="number" id="general>weather_alerts>refresh_interval" name="general>refresh_interval" step="1" placeholder="60" min="0" max="600" value="<?php echo $instance_config["general"]["weather_alerts"]["refresh_interval"] ?>"> <span>seconds</span><br><br>
+                                <label for="general>weather_alerts>refresh_interval">Refresh Interval:</label> <input type="number" id="general>weather_alerts>refresh_interval" name="general>weather_alerts>refresh_interval" step="1" placeholder="60" min="0" max="600" value="<?php echo $instance_config["general"]["weather_alerts"]["refresh_interval"] ?>"> <span>seconds</span><br><br>
                             </div>
                             <div class="buffer">
                                 <h4>Criteria</h4>
@@ -260,7 +352,7 @@ if ($_POST["theme"] == "dark"  or $_POST["theme"] == "light") { // Make sure the
                                 <div class="buffer">
                                     <h5>Temperature</h5>
                                     <label for="general>weather_alerts>criteria>temperature>below">Below:</label> <input type="number" min="-100" max="100" step="1" placeholder="-10" id="general>weather_alerts>criteria>visibility>below" name="general>weather_alerts>criteria>temperature>below" value="<?php echo $instance_config["general"]["weather_alerts"]["criteria"]["temperature"]["below"]; ?>"><span>°C</span><br><br>
-                                    <label for="general>weather_alerts>criteria>temperature>above">Above:</label> <input type="number" min="0" max="10000" step="100" placeholder="10000" id="general>weather_alerts>criteria>temperature>above" name="general>weather_alerts>criteria>temperature>above" value="<?php echo $instance_config["general"]["weather_alerts"]["criteria"]["temperature"]["above"]; ?>"><span>°C</span><br><br>
+                                    <label for="general>weather_alerts>criteria>temperature>above">Above:</label> <input type="number" min="0" max="10000" step="1" placeholder="40" id="general>weather_alerts>criteria>temperature>above" name="general>weather_alerts>criteria>temperature>above" value="<?php echo $instance_config["general"]["weather_alerts"]["criteria"]["temperature"]["above"]; ?>"><span>°C</span><br><br>
                                 </div>
                             </div>
                         </div>
@@ -276,6 +368,7 @@ if ($_POST["theme"] == "dark"  or $_POST["theme"] == "light") { // Make sure the
                             <label for="general>bluetooth_monitoring>scan_time">Scan Time:</label> <input type="number" min="0" max="15" step="1" placeholder="2" id="general>bluetooth_monitoring>scan_time" name="general>bluetooth_monitoring>scan_time" value="<?php echo $instance_config["general"]["bluetooth_monitoring"]["scan_time"]; ?>"> <span>seconds</span><br><br>
                             <label for="general>bluetooth_monitoring>minimum_following_distance">Following Distance:</label> <input type="number" min="0" max="30" step="0.1" placeholder="1" id="general>bluetooth_monitoring>minimum_following_distance" name="general>bluetooth_monitoring>minimum_following_distance" value="<?php echo $instance_config["general"]["bluetooth_monitoring"]["minimum_following_distance"]; ?>"> <span>miles</span><br><br>
                         </div>
+                        <input type="submit" value="Submit" class="button" name="instance">
                     </div>
                 </form>
             </main>
