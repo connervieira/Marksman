@@ -213,14 +213,14 @@ if ($_POST["theme"] == "dark"  or $_POST["theme"] == "light") { // Make sure the
                             $instance_config["general"]["adsb_alerts"]["message_time_to_live"] = floatval($_POST["general>adsb_alerts>message_time_to_live"]);
                             $instance_config["general"]["adsb_alerts"]["threat_threshold"] = intval($_POST["general>adsb_alerts>threat_threshold"]);
 
-                            $instance_config["general"]["adsb_alerts"]["minimum_aircraft_speed"] = floatval($_POST["general>adsb_alerts>minimum_aircraft_speed"]);
-                            $instance_config["general"]["adsb_alerts"]["maximum_aircraft_speed"] = floatval($_POST["general>adsb_alerts>maximum_aircraft_speed"]);
+                            $instance_config["general"]["adsb_alerts"]["criteria"]["speed"]["minimum"] = floatval($_POST["general>adsb_alerts>criteria>speed>minimum"]);
+                            $instance_config["general"]["adsb_alerts"]["criteria"]["speed"]["maximum"] = floatval($_POST["general>adsb_alerts>criteria>speed>maximum"]);
 
-                            $instance_config["general"]["adsb_alerts"]["minimum_aircraft_altitude"] = floatval($_POST["general>adsb_alerts>minimum_aircraft_altitude"]);
-                            $instance_config["general"]["adsb_alerts"]["maximum_aircraft_altitude"] = floatval($_POST["general>adsb_alerts>maximum_aircraft_altitude"]);
+                            $instance_config["general"]["adsb_alerts"]["criteria"]["altitude"]["minimum"] = floatval($_POST["general>adsb_alerts>criteria>altitude>minimum"]);
+                            $instance_config["general"]["adsb_alerts"]["criteria"]["altitude"]["maximum"] = floatval($_POST["general>adsb_alerts>criteria>altitude>maximum"]);
 
-                            $instance_config["general"]["adsb_alerts"]["distance_threshold"] = floatval($_POST["general>adsb_alerts>distance_threshold"]);
-                            $instance_config["general"]["adsb_alerts"]["base_altitude_threshold"] = floatval($_POST["general>adsb_alerts>base_altitude_threshold"]);
+                            $instance_config["general"]["adsb_alerts"]["criteria"]["distance"]["base_distance"] = floatval($_POST["general>adsb_alerts>criteria>distance>base_distance"]);
+                            $instance_config["general"]["adsb_alerts"]["criteria"]["distance"]["base_altitude"] = floatval($_POST["general>adsb_alerts>criteria>distance>base_altitude"]);
 
 
                             // Weather alert configuration.
@@ -326,18 +326,18 @@ if ($_POST["theme"] == "dark"  or $_POST["theme"] == "light") { // Make sure the
                                 <h5>Criteria</h5>
                                 <div class="buffer">
                                     <h5>Speed</h5>
-                                    <label for="general>adsb_alerts>minimum_aircraft_speed">Minimum Aircraft Speed:</label> <input type="number" id="general>adsb_alerts>minimum_aircraft_speed" name="general>adsb_alerts>minimum_aircraft_speed" step="1" placeholder="20" min="0" max="200" value="<?php echo $instance_config["general"]["adsb_alerts"]["minimum_aircraft_speed"] ?>"> <span>knots</span><br><br>
-                                    <label for="general>adsb_alerts>maximum_aircraft_speed">Maximum Aircraft Speed:</label> <input type="number" id="general>adsb_alerts>maximum_aircraft_speed" name="general>adsb_alerts>maximum_aircraft_speed" step="1" placeholder="200" min="0" max="1000" value="<?php echo $instance_config["general"]["adsb_alerts"]["maximum_aircraft_speed"] ?>"> <span>knots</span><br><br>
+                                    <label for="general>adsb_alerts>criteria>speed>minimum">Minimum Aircraft Speed:</label> <input type="number" id="general>adsb_alerts>criteria>speed>minimum" name="general>adsb_alerts>criteria>speed>minimum" step="1" placeholder="20" min="0" max="200" value="<?php echo $instance_config["general"]["adsb_alerts"]["criteria"]["speed"]["minimum"] ?>"> <span>knots</span><br><br>
+                                    <label for="general>adsb_alerts>criteria>speed>maximum">Maximum Aircraft Speed:</label> <input type="number" id="general>adsb_alerts>criteria>speed>maximum" name="general>adsb_alerts>criteria>speed>maximum" step="1" placeholder="200" min="0" max="1000" value="<?php echo $instance_config["general"]["adsb_alerts"]["criteria"]["speed"]["maximum"] ?>"> <span>knots</span><br><br>
                                 </div>
                                 <div class="buffer">
                                     <h5>Altitude</h5>
-                                    <label for="general>adsb_alerts>minimum_aircraft_altitude">Minimum Aircraft Altitude:</label> <input type="number" id="general>adsb_alerts>minimum_aircraft_altitude" name="general>adsb_alerts>minimum_aircraft_altitude" step="100" placeholder="500" min="0" max="50000" value="<?php echo $instance_config["general"]["adsb_alerts"]["minimum_aircraft_altitude"] ?>"> <span>feet</span><br><br>
-                                    <label for="general>adsb_alerts>maximum_aircraft_altitude">Maximum Aircraft Altitude:</label> <input type="number" id="general>adsb_alerts>maximum_aircraft_altitude" name="general>adsb_alerts>maximum_aircraft_altitude" step="1" placeholder="8000" min="0" max="50000" value="<?php echo $instance_config["general"]["adsb_alerts"]["maximum_aircraft_altitude"] ?>"> <span>feet</span><br><br>
+                                    <label for="general>adsb_alerts>criteria>altitude>minimum">Minimum Aircraft Altitude:</label> <input type="number" id="general>adsb_alerts>criteria>altitude>minimum" name="general>adsb_alerts>criteria>altitude>minimum" step="100" placeholder="500" min="0" max="50000" value="<?php echo $instance_config["general"]["adsb_alerts"]["criteria"]["altitude"]["minimum"] ?>"> <span>feet</span><br><br>
+                                    <label for="general>adsb_alerts>criteria>altitude>maximum">Maximum Aircraft Altitude:</label> <input type="number" id="general>adsb_alerts>criteria>altitude>maximum" name="general>adsb_alerts>criteria>altitude>maximum" step="1" placeholder="8000" min="0" max="50000" value="<?php echo $instance_config["general"]["adsb_alerts"]["criteria"]["altitude"]["maximum"] ?>"> <span>feet</span><br><br>
                                 </div>
                                 <div class="buffer">
                                     <h5>Distance</h5>
-                                    <label for="general>adsb_alerts>distance_threshold">Distance Threshold:</label> <input type="number" id="general>adsb_alerts>distance_threshold" name="general>adsb_alerts>distance_threshold" step="1" placeholder="5" min="0" max="100" value="<?php echo $instance_config["general"]["adsb_alerts"]["distance_threshold"] ?>"> <span>miles</span><br><br>
-                                    <label for="general>adsb_alerts>base_altitude_threshold">Base Altitude:</label> <input type="number" id="general>adsb_alerts>base_altitude_threshold" name="general>adsb_alerts>base_altitude_threshold" step="1" placeholder="8000" min="0" max="50000" value="<?php echo $instance_config["general"]["adsb_alerts"]["base_altitude_threshold"] ?>"> <span>feet</span><br><br>
+                                    <label for="general>adsb_alerts>criteria>distance>base_distance">Distance Threshold:</label> <input type="number" id="general>adsb_alerts>criteria>distance>base_distance" name="general>adsb_alerts>criteria>distance>base_distance" step="1" placeholder="5" min="0" max="100" value="<?php echo $instance_config["general"]["adsb_alerts"]["criteria"]["distance"]["base_distance"] ?>"> <span>miles</span><br><br>
+                                    <label for="general>adsb_alerts>criteria>distance>base_distance">Base Altitude:</label> <input type="number" id="general>adsb_alerts>criteria>distance>base_distance" name="general>adsb_alerts>criteria>distance>base_distance" step="1" placeholder="8000" min="0" max="50000" value="<?php echo $instance_config["general"]["adsb_alerts"]["criteria"]["distance"]["base_distance"] ?>"> <span>feet</span><br><br>
                                 </div>
                             </div>
                         </div>
