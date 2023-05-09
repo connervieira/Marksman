@@ -33,3 +33,4 @@ March 22nd, 2023
 - Remove an improper reference to Predator in an input placeholder.
 - Added auto-fill to the "Interface Directory" field when left blank.
     - If no interface directory is provided, Marksman will attempt to pull it from the instance configuration file.
+- Added logo as the web-page favicon.
