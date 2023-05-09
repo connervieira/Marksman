@@ -30,3 +30,6 @@ March 22nd, 2023
 - The connected Assassin instance configuration can now be modified directly from the Marksman settings page.
     - Commonly modified settings can be changed from the graphical interface.
 - Made the interface more compact for better usability on smaller displays.
+- Remove an improper reference to Predator in an input placeholder.
+- Added auto-fill to the "Interface Directory" field when left blank.
+    - If no interface directory is provided, Marksman will attempt to pull it from the instance configuration file.

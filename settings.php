@@ -82,6 +82,13 @@ if ($_POST["theme"] == "dark"  or $_POST["theme"] == "light") { // Make sure the
                         $valid = false; // Indicate that the configuration is not valid, and shouldn't be saved.
                     }
 
+                    if ($_POST["interface_directory"] == "") { // If the interface directory input, was left blank, then attempt to autofill it.
+                        $instance_configuration_path = $config["instance_directory"] . "/config.json"; // This is the file path to the configuration file of the Assassin instance.
+                        if (file_exists($instance_configuration_path)) { // Check to see if the instance configuration file exists.
+                            $instance_config = json_decode(file_get_contents($config["instance_directory"] . "/config.json"), true); // Load the instance configuration file.
+                            $_POST["interface_directory"] = $instance_config["external"]["local"]["interface_directory"]; // Auto-fill the interface directory.
+                        }
+                    }
                     if (is_dir($_POST["interface_directory"])) { // Make sure the interface directory input is actually a directory.
                         $config["interface_directory"] = $_POST["interface_directory"]; // Save the submitted interface directory option to the configuration array.
                     } else {
@@ -134,7 +141,7 @@ if ($_POST["theme"] == "dark"  or $_POST["theme"] == "light") { // Make sure the
                         <h3>Connection Settings</h3>
                         <label for="exec_user">Execution User:</label> <input type="text" id="exec_user" name="exec_user" placeholder="Username" pattern="[a-zA-Z0-9]{1,100}" value="<?php echo $config["exec_user"]; ?>"><br><br>
                         <label for="instance_directory">Instance Directory:</label> <input type="text" id="instance_directory" name="instance_directory" placeholder="/home/assassin/Assassin" value="<?php echo $config["instance_directory"]; ?>"><br><br>
-                        <label for="interface_directory">Interface Directory:</label> <input type="text" id="interface_directory" name="interface_directory" placeholder="/home/predator/Instance/" value="<?php echo $config["interface_directory"]; ?>"><br><br>
+                        <label for="interface_directory">Interface Directory:</label> <input type="text" id="interface_directory" name="interface_directory" placeholder="/home/assassin/Instance/" value="<?php echo $config["interface_directory"]; ?>"><br><br>
                         <label for="refresh_delay">Refresh Delay:</label> <input type="number" id="refresh_delay" name="refresh_delay" placeholder="100" step="1" min="1" max="5000" value="<?php echo $config["refresh_delay"]; ?>"> <span>milliseconds</span><br><br>
                         <label for="precision_coordinates">Coordinate Precision:</label> <input type="number" id="precision_coordinates" name="precision_coordinates" placeholder="4" step="1" min="0" max="10" value="<?php echo $config["precision"]["coordinates"]; ?>"> <span>places</span><br><br>
 
