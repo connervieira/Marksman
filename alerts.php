@@ -227,6 +227,7 @@ foreach ($last_alert["aircraft"] as $key => $alert) { // Iterate through each ti
     }
     echo "    <th width=\"40%\">";
     echo "        <h4>Aircraft</h4>";
+    echo "        <p>" . $alert["id"] . "</p>";
     echo "    </th>";
     echo "    <th width=\"25%\">";
     if ($alert["latitude"] == 0 and $alert["longitude"] == 0) {
