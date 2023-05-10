@@ -79,6 +79,11 @@ if ($_POST["theme"] == "dark"  or $_POST["theme"] == "light") { // Make sure the
                         echo "<p class='error'>The execution user can only contain alpha-numeric characters.</p>";
                         $valid = false; // Indicate that the configuration is not valid, and shouldn't be saved.
                     }
+                    if ($_POST["log_output"] == "on") { // Check to see if output logging was checked in the form.
+                        $config["log_output"] = true; // This determines whether or not Marksman will direct Assassin's console output to a log file.
+                    } else {
+                        $config["log_output"] = false; // This determines whether or not Marksman will direct Assassin's console output to a log file.
+                    }
 
                     if (is_dir($_POST["instance_directory"])) { // Make sure the root directory input is actually a directory.
                         $config["instance_directory"] = $_POST["instance_directory"]; // Save the submitted root directory option to the configuration array.
@@ -145,6 +150,7 @@ if ($_POST["theme"] == "dark"  or $_POST["theme"] == "light") { // Make sure the
                     <div class="buffer">
                         <h3>Connection Settings</h3>
                         <label for="exec_user">Execution User:</label> <input type="text" id="exec_user" name="exec_user" placeholder="Username" pattern="[a-zA-Z0-9]{1,100}" value="<?php echo $config["exec_user"]; ?>"><br><br>
+                        <label for="log_output">Log Output:</label> <input type="checkbox" id="log_output" name="log_output" <?php if ($config["log_output"] == true) { echo "checked"; } ?>><br><br>
                         <label for="instance_directory">Instance Directory:</label> <input type="text" id="instance_directory" name="instance_directory" placeholder="/home/assassin/Assassin" value="<?php echo $config["instance_directory"]; ?>"><br><br>
                         <label for="interface_directory">Interface Directory:</label> <input type="text" id="interface_directory" name="interface_directory" placeholder="/home/assassin/Instance/" value="<?php echo $config["interface_directory"]; ?>"><br><br>
                         <label for="refresh_delay">Refresh Delay:</label> <input type="number" id="refresh_delay" name="refresh_delay" placeholder="100" step="1" min="1" max="5000" value="<?php echo $config["refresh_delay"]; ?>"> <span>milliseconds</span><br><br>

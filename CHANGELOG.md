@@ -34,4 +34,7 @@ March 22nd, 2023
 - Added auto-fill to the "Interface Directory" field when left blank.
     - If no interface directory is provided, Marksman will attempt to pull it from the instance configuration file.
 - Added logo as the web-page favicon.
-- Aircraft alerts now display the aircraft's identifier.
+- Updated aircraft alert display.
+    - Aircraft alerts now display the aircraft's identifier.
+    - Aircraft alerts that are missing directional information are now more resilient.
+- Added the ability to redirect Assassin's console output to a log file for debugging.

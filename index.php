@@ -38,7 +38,11 @@ include "./utils.php";
         }
         if ($action == "start") {
             if (is_writable("./start.sh")) {
-                file_put_contents("./start.sh", "cd " . $config["instance_directory"] . "; python3 " . $config["instance_directory"] . "/main.py &"); // Update the start script.
+                if ($config["log_output"] == true) { // Check to see if Marksman is configured to log the output of Assassin.
+                    file_put_contents("./start.sh", "cd " . $config["instance_directory"] . "; python3 " . $config["instance_directory"] . "/main.py > marksmanoutput" . round(time()) . ".txt"); // Update the start script.
+                } else { // Marksman is not configured to log the output of Assassin.
+                    file_put_contents("./start.sh", "cd " . $config["instance_directory"] . "; python3 " . $config["instance_directory"] . "/main.py &"); // Update the start script.
+                }
             } else {
                 echo "<p class=\"error\">The start.sh script is not writable.</p>";
                 exit();

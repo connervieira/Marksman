@@ -215,7 +215,7 @@ foreach ($last_alert["traffic_camera"] as $key => $alert) { // Iterate through e
 // Cyan
 foreach ($last_alert["aircraft"] as $key => $alert) { // Iterate through each time-based attention alert.
     echo "<table class=\"alert cyan\"><tr>";
-    if ($alert["relativeheading"] == 0) {
+    if ($alert["relativeheading"] == "?" or $alert["relativeheading"] == "?" or $alert["relativeheading"] == 0) {
         echo "    <th width=\"5%\"><img src=\"img/question.svg\" style=\"height:50px;\"></th>";
     } else {
         echo "    <th width=\"5%\"><img src=\"img/alerts/aircraft.svg\" style=\"height:50px;transform:rotate(" . ($alert["relativeheading"] - 90) . "deg);\"></th>";
