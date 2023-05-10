@@ -62,8 +62,8 @@ include "./utils.php";
         }
         ?>
         <main>
-            <br><hr><br>
-            <div class="display">
+            <hr>
+            <div>
                 <?php
                 if (is_alive($config) == true) {
                     $start_button = '<a class="button" role="button" id="startbutton" style="color:#aaaaaa" role="button" href="#">Start</a>';
@@ -76,7 +76,7 @@ include "./utils.php";
                 echo $start_button;
                 echo $stop_button;
                 ?>
-                <br><br>
+                <br>
                 <p>The last instance heartbeat was <b id="lastheartbeatdisplay">X</b> seconds ago.</p>
             </div>
             <div id="alertsframe"></div>
