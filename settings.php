@@ -342,7 +342,7 @@ if ($_POST["theme"] == "dark"  or $_POST["theme"] == "light") { // Make sure the
                                 <div class="buffer">
                                     <h5>Distance</h5>
                                     <label for="general>adsb_alerts>criteria>distance>base_distance">Distance Threshold:</label> <input type="number" id="general>adsb_alerts>criteria>distance>base_distance" name="general>adsb_alerts>criteria>distance>base_distance" step="1" placeholder="5" min="0" max="100" value="<?php echo $instance_config["general"]["adsb_alerts"]["criteria"]["distance"]["base_distance"] ?>"> <span>miles</span><br><br>
-                                    <label for="general>adsb_alerts>criteria>distance>base_distance">Base Altitude:</label> <input type="number" id="general>adsb_alerts>criteria>distance>base_distance" name="general>adsb_alerts>criteria>distance>base_distance" step="1" placeholder="8000" min="0" max="50000" value="<?php echo $instance_config["general"]["adsb_alerts"]["criteria"]["distance"]["base_distance"] ?>"> <span>feet</span><br><br>
+                                    <label for="general>adsb_alerts>criteria>distance>base_altitude">Base Altitude:</label> <input type="number" id="general>adsb_alerts>criteria>distance>base_altitude" name="general>adsb_alerts>criteria>distance>base_altitude" step="1" placeholder="8000" min="0" max="50000" value="<?php echo $instance_config["general"]["adsb_alerts"]["criteria"]["distance"]["base_altitude"] ?>"> <span>feet</span><br><br>
                                 </div>
                             </div>
                         </div>
