@@ -50,6 +50,20 @@ include "./utils.php";
             }
             if (file_exists("./start.sh")) { // Verify that the start script exists.
                 if (is_alive($config) == false) {
+                    $alerts_file_path = $config["interface_directory"] . "/alerts.json";
+                    $status_file_path = $config["interface_directory"] . "/status.json";
+                    if (is_dir($config["interface_directory"]) == true) { // Check to make sure the specified interface directory exists.
+                        if (file_exists($alerts_file_path) == true) { // Check to see if the alert file exists.
+                            if (is_writable($alerts_file_path)) {
+                                file_put_contents($alerts_file_path, "{}"); // Erase the contents of the alert file.
+                            }
+                        }
+                        if (file_exists($status_file_path) == true) { // Check to see if the status log file exists.
+                            if (is_writable($status_file_path)) {
+                                file_put_contents($status_file_path, "{}"); // Erase the contents of the status log file.
+                            }
+                        }
+                    }
                     $start_command = "sudo -u " . $config["exec_user"] . " sh ./start.sh"; // Prepare the command to start an instance.
                     shell_exec($start_command . ' > /dev/null 2>&1 &'); // Start an instance.
                     header("Location: ."); // Reload the page to remove any arguments from the URL.
@@ -75,7 +89,7 @@ include "./utils.php";
                     $stop_button = '<a class="button" role="button" id="stopbutton" style="color:#ffffff" role="button" href="?action=stop">Stop</a>';
                 } else {
                     $start_button = '<a class="button" role="button" id="startbutton" style="color:#ffffff" role="button" href="?action=start">Start</a>';
-                    $stop_button = '<a class="button" role="button" id="stopbutton" style="color:#aaaaaa" role="button" href="#">Stop</a>';
+                    $stop_button = '<a class="button" role="button" id="stopbutton" style="color:#aaaaaa" role="button" href="?action=stop">Stop</a>';
                 }
 
                 echo $start_button;
@@ -103,7 +117,7 @@ include "./utils.php";
                 document.getElementById("startbutton").style.color = "#ffffff";
                 document.getElementById("startbutton").href = "?action=start";
                 document.getElementById("stopbutton").style.color = "#aaaaaa";
-                document.getElementById("stopbutton").href = "#";
+                document.getElementById("stopbutton").href = "?action=stop";
             }
             document.getElementById("lastheartbeatdisplay").innerHTML = await (Math.round(status_result.last_heartbeat*100)/100).toFixed(2);
 

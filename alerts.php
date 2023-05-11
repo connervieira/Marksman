@@ -3,16 +3,67 @@ include "./config.php";
 include "./utils.php";
 
 $alerts_file_path = $config["interface_directory"] . "/alerts.json";
-
+$status_file_path = $config["interface_directory"] . "/status.json";
 if (is_dir($config["interface_directory"]) == true) { // Check to make sure the specified interface directory exists.
     if (file_exists($alerts_file_path) == true) { // Check to see if the alert file exists.
         $alert_log = json_decode(file_get_contents($alerts_file_path), true); // Load the alerts from the JSON data in the alert file.
-    } else { // If the heartbeat file doesn't exist, then load a blank placeholder instead.
+    } else { // If the alert file doesn't exist, then load a blank placeholder instead.
         $alert_log = array(); // Set the alert log to an empty array.
+    }
+
+    if (file_exists($status_file_path) == true) { // Check to see if the status log file exists.
+        $status_log = json_decode(file_get_contents($status_file_path), true); // Load the status messages from the JSON data in the status log file.
+    } else { // If the status file doesn't exist, then load a blank placeholder instead.
+        $status_log = array(); // Set the status log to an empty array.
+    }
+}
+
+
+$status_log_status = array();
+$status_log_warnings = array();
+$status_log_errors = array();
+
+
+foreach ($status_log as $time => $message) {
+    if (intval($message[0]) == 1) {
+        $status_log_status[$time] = [$time, $message[1]];
+    } else if (intval($message[0]) == 2) {
+        $status_log_warnings[$time] = $message[1];
+    } else if (intval($message[0]) == 3) {
+        $status_log_errors[$time] = $message[1];
     }
 }
 
 $last_alert = end($alert_log); // Get the last entry in the alert log.
+
+$last_status_status = end($status_log_status); // Get the last status entry in the status log.
+
+
+if (time() - floatval($last_status_status[0]) < 5) {
+    echo "<table class=\"alert message_status\"><tr>";
+    echo "    <th width=\"5%;\"><img src=\"img/message.svg\" height=\"50px\"></th>";
+    echo "    <th width=\"35%;\"><h4>Status</h4></th>";
+    echo "    <th width=\"60%;\"><p>" . $last_status_status[1] . "</p></th>";
+    echo "</tr></table>";
+}
+foreach (array_reverse($status_log_warnings) as $time => $message) {
+    if (time() - floatval($time) < 15) {
+        echo "<table class=\"alert message_warning\"><tr>";
+        echo "    <th width=\"5%;\"><img src=\"img/message.svg\" height=\"50px\"></th>";
+        echo "    <th width=\"35%;\"><h4>Warning</h4></th>";
+        echo "    <th width=\"60%;\"><p>" . $message . "</p></th>";
+        echo "</tr></table>";
+    }
+}
+foreach (array_reverse($status_log_errors) as $time => $message) {
+    if (time() - floatval($time) < 300) {
+        echo "<table class=\"alert message_error\"><tr>";
+        echo "    <th width=\"5%;\"><img src=\"img/message.svg\" height=\"50px\"></th>";
+        echo "    <th width=\"35%;\"><h4>Error</h4></th>";
+        echo "    <th width=\"60%;\"><p>" . $message . "</p></th>";
+        echo "</tr></table>";
+    }
+}
 
 
 

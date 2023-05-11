@@ -76,6 +76,9 @@ table p, table h4 {
     border-radius: 15px;
     color: #ffffff;
 }
+.message_status { background-color: #444444; color:#ffffff}
+.message_warning { background-color: #444444; color:#ffff00; }
+.message_error { background-color: #444444; color:#ff0000; }
 .red { background-color: #ca0000; }
 .orange { background-color: #cc5500; }
 .yellow { background-color: #ca9000; }

@@ -199,6 +199,7 @@ if ($_POST["theme"] == "dark"  or $_POST["theme"] == "light") { // Make sure the
 
 
                             // Traffic camera alert configuration.
+                            if ($_POST["general>traffic_camera_alerts>enabled"] == "on") { $instance_config["general"]["traffic_camera_alerts"]["enabled"] = true; } else { $instance_config["general"]["traffic_camera_alerts"]["enabled"] = false; }
                             $instance_config["general"]["traffic_camera_alerts"]["loaded_radius"] = floatval($_POST["general>traffic_camera_alerts>loaded_radius"]);
                             $instance_config["general"]["traffic_camera_alerts"]["alert_range"] = floatval($_POST["general>traffic_camera_alerts>alert_range"]);
                             if ($_POST["general>traffic_camera_alerts>enabled_types>speed"] == "on") { $instance_config["general"]["traffic_camera_alerts"]["enabled_types"]["speed"] = true; } else { $instance_config["general"]["traffic_camera_alerts"]["enabled_types"]["speed"] = false; }
@@ -207,6 +208,7 @@ if ($_POST["theme"] == "dark"  or $_POST["theme"] == "light") { // Make sure the
 
 
                             // ALPR alert configuration.
+                            if ($_POST["general>alpr_alerts>enabled"] == "on") { $instance_config["general"]["alpr_alerts"]["enabled"] = true; } else { $instance_config["general"]["alpr_alerts"]["enabled"] = false; }
                             $instance_config["general"]["alpr_alerts"]["loaded_radius"] = floatval($_POST["general>alpr_alerts>loaded_radius"]);
                             $instance_config["general"]["alpr_alerts"]["alert_range"] = floatval($_POST["general>alpr_alerts>alert_range"]);
                             $instance_config["general"]["alpr_alerts"]["angle_threshold"] = floatval($_POST["general>alpr_alerts>angle_threshold"]);
@@ -306,6 +308,7 @@ if ($_POST["theme"] == "dark"  or $_POST["theme"] == "light") { // Make sure the
                         </div>
                         <div class="buffer">
                             <h4>Traffic Enforcement Cameras</h4>
+                            <label for="general>traffic_camera_alerts>enabled">Enabled:</label> <input type="checkbox" id="general>traffic_camera_alerts>enabled" name="general>traffic_camera_alerts>enabled" <?php if ($instance_config["general"]["traffic_camera_alerts"]["enabled"]) { echo "checked"; } ?>><br><br>
                             <label for="general>traffic_camera_alerts>loaded_radius">Loaded Radius:</label> <input type="number" id="general>traffic_camera_alerts>loaded_radius" name="general>traffic_camera_alerts>loaded_radius" step="10" placeholder="500" min="0" max="5000" value="<?php echo $instance_config["general"]["traffic_camera_alerts"]["loaded_radius"] ?>"> <span>miles</span><br><br>
                             <label for="general>traffic_camera_alerts>alert_range">Alert Range:</label> <input type="number" id="general>traffic_camera_alerts>alert_range" name="general>traffic_camera_alerts>alert_range" step="0.1" placeholder="1" min="0" max="10" value="<?php echo $instance_config["general"]["traffic_camera_alerts"]["alert_range"] ?>"> <span>miles</span><br><br>
                             <div class="buffer">
@@ -317,6 +320,7 @@ if ($_POST["theme"] == "dark"  or $_POST["theme"] == "light") { // Make sure the
                         </div>
                         <div class="buffer">
                             <h4>License Plate Recognition Cameras</h4>
+                            <label for="general>alpr_alerts>enabled">Enabled:</label> <input type="checkbox" id="general>alpr_alerts>enabled" name="general>alpr_alerts>enabled" <?php if ($instance_config["general"]["alpr_alerts"]["enabled"]) { echo "checked"; } ?>><br><br>
                             <label for="general>alpr_alerts>loaded_radius">Loaded Radius:</label> <input type="number" id="general>alpr_alerts>loaded_radius" name="general>alpr_alerts>loaded_radius" step="10" placeholder="500" min="0" max="5000" value="<?php echo $instance_config["general"]["alpr_alerts"]["loaded_radius"] ?>"> <span>miles</span><br><br>
                             <label for="general>alpr_alerts>alert_range">Alert Range:</label> <input type="number" id="general>alpr_alerts>alert_range" name="general>alpr_alerts>alert_range" step="0.1" placeholder="1" min="0" max="10" value="<?php echo $instance_config["general"]["alpr_alerts"]["alert_range"] ?>"> <span>miles</span><br><br>
                             <label for="general>alpr_alerts>angle_threshold">Angle Threshold:</label> <input type="number" id="general>alpr_alerts>angle_threshold" name="general>alpr_alerts>angle_threshold" step="1" placeholder="50" min="0" max="180" value="<?php echo $instance_config["general"]["alpr_alerts"]["angle_threshold"] ?>"> <span>degrees</span><br><br>

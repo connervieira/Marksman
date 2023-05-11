@@ -13,17 +13,31 @@ if (file_exists("./config.php")) {
 // The `last_heartbeat` function gets the time since the last heartbeat from the instance.
 function last_heartbeat($config) {
     $alerts_file_path = $config["interface_directory"] . "/alerts.json";
+    $status_file_path = $config["interface_directory"] . "/status.json";
     if (is_dir($config["interface_directory"]) == true) { // Check to make sure the specified interface directory exists.
         if (file_exists($alerts_file_path)) { // Check to see if the alert file exists.
             $heartbeat_log = array_keys(json_decode(file_get_contents($alerts_file_path), true)); // Load the heartbeat log from the JSON data in the alerts file.
         } else { // If the heartbeat file doesn't exist, then load a blank placeholder instead.
             $heartbeat_log = array(); // Set the heartbeat log to an empty array.
         }
+        if (file_exists($status_file_path)) { // Check to see if the status message log.
+            $status_log = array_keys(json_decode(file_get_contents($status_file_path), true)); // Load the status message log from the JSON data in the alerts file.
+        } else { // If the heartbeat file doesn't exist, then load a blank placeholder instead.
+            $status_log = array(); // Set the status message log to an empty array.
+        }
     } else {
         $heartbeat_log = array(); // Set the heartbeat log to an empty array.
     }
 
-    $last_heartbeat = microtime(true) - floatval(end($heartbeat_log)); // Calculate how many seconds ago the last heartbeat was.
+    $last_alert_heartbeat = microtime(true) - floatval(end($heartbeat_log)); // Calculate how many seconds ago the last heartbeat was, using the alert log.
+    $last_status_heartbeat = microtime(true) - floatval(end($status_log)); // Calculate how many seconds ago the last heartbeat was, using the status log.
+
+    if ($last_status_heartbeat < $last_alert_heartbeat) {
+        $last_heartbeat = $last_status_heartbeat;
+    } else {
+        $last_heartbeat = $last_alert_heartbeat;
+    }
+
     if ($last_heartbeat < -5) { // If the heartbeat happened more than 5 seconds in the future, then assume the clocks are desynced.
         $last_heartbeat = -1;
     } else if ($last_heartbeat < 0) { // If the heartbeat is only a few seconds in the future, then assume the time since the last heartbeat is 0 seconds.
