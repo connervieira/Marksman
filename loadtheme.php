@@ -5,5 +5,6 @@
 // This script must be called in the <head></head> tag, and must be called after the "./config.php" import line.
 
 echo "<link rel='stylesheet' href='./styles/themes/" . $config["theme"] . ".css'>";
+echo "<link rel='stylesheet' href='../styles/themes/" . $config["theme"] . ".css'>";
 
 ?>

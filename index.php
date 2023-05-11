@@ -24,7 +24,8 @@ include "./utils.php";
     <body>
         <div class="navbar" role="navigation">
             <a class="button" role="button" href="./logout.php">Logout</a>
-            <a class="button" role="button" href="./settings.php">Settings</a><br>
+            <a class="button" role="button" href="./settings.php">Settings</a>
+            <a class="button" role="button" href="./tools.php">Tools</a><br>
         </div>
         <noscript><p class="error">Your browser does not appear to have JavaScript enabled. <?php echo $config["product_name"]  ?> requires JavaScript to function.</p></noscript>
         <?php

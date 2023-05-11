@@ -38,3 +38,4 @@ March 22nd, 2023
     - Aircraft alerts now display the aircraft's identifier.
     - Aircraft alerts that are missing directional information are now more resilient.
 - Added the ability to redirect Assassin's console output to a log file for debugging.
+- Added file management tools.

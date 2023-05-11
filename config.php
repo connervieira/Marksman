@@ -2,6 +2,9 @@
 
 $config_database_name = "./config.txt";
 
+if (file_exists("../config.txt")) {
+    $config_database_name = "../config.txt";
+}
 
 if (is_writable(".") == false) {
     echo "<p class=\"error\">The " . getcwd() . " directory is not writable to PHP.</p>";
