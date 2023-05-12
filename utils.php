@@ -49,7 +49,10 @@ function last_heartbeat($config) {
 
 // The `is_alive` function checks to see if the linked instance is running, based on its heartbeat.
 function is_alive($config) {
-    if (last_heartbeat($config) < $config["heartbeat_threshold"]) { // Only consider the system online if it's last heartbeat was within a certain number of seconds ago.
+    $last_heartbeat = last_heartbeat($config);
+    if ($last_heartbeat == -1) {
+        return false;
+    } else if ($last_heartbeat < $config["heartbeat_threshold"]) { // Only consider the system online if it's last heartbeat was within a certain number of seconds ago.
         return true;
     } else { // If the last heartbeat exceeded the time to be considered online, display a message that the system is offline.
         return false;

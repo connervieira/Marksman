@@ -24,7 +24,6 @@ March 22nd, 2023
     - GPS over-speed alerts are now rounded to 2 decimal places.
     - Added support for frozen GPS alerts.
     - Added support for GPS diagnostic alerts.
-- The start.sh script placeholder is now created when the index pages loads, rather than the first time the "Start" button is pressed.
 - Refined permissions verification process.
 - Fixed a problem where Marksman would encounter a fatal error if the Assassin interface directory was missing.
 - The connected Assassin instance configuration can now be modified directly from the Marksman settings page.
@@ -41,3 +40,8 @@ March 22nd, 2023
 - Added file management tools.
 - Marksman now considers the timestamps associated with status, warning, and error messages when calculating the last heartbeat time.
 - Status, warning, and error messages from Assassin are now displayed in the main dashboard.
+- Updated the start-stop system.
+    - The "Stop" button is now always active, even when it appears disabled.
+    - Added a "Restart" button to quickly stop, then start Assassin.
+    - Moved the Assassin start system to a function to make the control script more organized.
+    - The start.sh script placeholder is now created when the index pages loads, rather than the first time the "Start" button is pressed.

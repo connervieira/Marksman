@@ -172,6 +172,8 @@ if ($_POST["theme"] == "dark"  or $_POST["theme"] == "light") { // Make sure the
                         if ($_POST["instance"] == "Submit") { // Check to see if the instance settings form was submitted.
                             // General configuration.
                             $instance_config["general"]["refresh_delay"] = floatval($_POST["general>refresh_delay"]);
+                            $instance_config["general"]["gps"]["speed_source"] = strval($_POST["general>gps>speed_source"]);
+                            $instance_config["general"]["gps"]["provider"] = strval($_POST["general>gps>provider"]);
 
 
                             // GPS alert configuration.
@@ -268,6 +270,21 @@ if ($_POST["theme"] == "dark"  or $_POST["theme"] == "light") { // Make sure the
                     <div class="buffer">
                         <h3>General</h3>
                         <label for="general>refresh_delay">Refresh Delay:</label> <input type="number" id="general>refresh_delay" name="general>refresh_delay" placeholder="0.5" step="0.1" min="0" max="60" value="<?php echo $instance_config["general"]["refresh_delay"]; ?>"> <span>seconds</span><br><br>
+                        
+                        <div class="buffer">
+                            <h4>GPS</h4>
+                            <label for="general>gps>provider">Provider:</label>
+                            <select id="general>gps>provider" name="general>gps>provider">
+                                <option value="gpsd" <?php if ($instance_config["general"]["gps"]["provider"] == "gpsd") { echo "selected"; } ?>>GPSD</option>
+                                <option value="termux" <?php if ($instance_config["general"]["gps"]["provider"] == "termux") { echo "selected"; } ?>>Termux</option>
+                                <option value="locateme" <?php if ($instance_config["general"]["gps"]["provider"] == "locateme") { echo "selected"; } ?>>LocateMe</option>
+                            </select><br>
+                            <label for="general>gps>speed_source">Speed Source:</label>
+                            <select id="general>gps>speed_source" name="general>gps>speed_source">
+                                <option value="hardware" <?php if ($instance_config["general"]["gps"]["speed_source"] == "hardware") { echo "selected"; } ?>>Hardware</option>
+                                <option value="calculated" <?php if ($instance_config["general"]["gps"]["speed_source"] == "calculated") { echo "selected"; } ?>>Calculated</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="buffer">
                         <h3>Alerts</h3>
