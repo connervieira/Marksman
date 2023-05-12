@@ -31,6 +31,41 @@ include "./utils.php";
         <?php
         verify_permissions($config); // Verify that PHP has all of the appropriate permissions.
 
+        function start_assassin($config) {
+            if (is_writable("./start.sh")) {
+                if ($config["log_output"] == true) { // Check to see if Marksman is configured to log the output of Assassin.
+                    file_put_contents("./start.sh", "cd " . $config["instance_directory"] . "; python3 " . $config["instance_directory"] . "/main.py --headless > marksmanoutput" . round(time()) . ".txt"); // Update the start script.
+                } else { // Marksman is not configured to log the output of Assassin.
+                    file_put_contents("./start.sh", "cd " . $config["instance_directory"] . "; python3 " . $config["instance_directory"] . "/main.py --headless &"); // Update the start script.
+                }
+            } else {
+                echo "<p class=\"error\">The start.sh script is not writable.</p>";
+                exit();
+            }
+            if (file_exists("./start.sh")) { // Verify that the start script exists.
+                $alerts_file_path = $config["interface_directory"] . "/alerts.json";
+                $status_file_path = $config["interface_directory"] . "/status.json";
+                if (is_dir($config["interface_directory"]) == true) { // Check to make sure the specified interface directory exists.
+                    if (file_exists($alerts_file_path) == true) { // Check to see if the alert file exists.
+                        if (is_writable($alerts_file_path)) {
+                            file_put_contents($alerts_file_path, "{}"); // Erase the contents of the alert file.
+                        }
+                    }
+                    if (file_exists($status_file_path) == true) { // Check to see if the status log file exists.
+                        if (is_writable($status_file_path)) {
+                            file_put_contents($status_file_path, "{}"); // Erase the contents of the status log file.
+                        }
+                    }
+                }
+                $start_command = "sudo -u " . $config["exec_user"] . " sh ./start.sh"; // Prepare the command to start an instance.
+                shell_exec($start_command . ' > /dev/null 2>&1 &'); // Start an instance.
+                header("Location: ."); // Reload the page to remove any arguments from the URL.
+            } else {
+                echo "<p class=\"error\">The start script doesn't appear to exist.</p>";
+                echo "<p class=\"error\">The program could not be started.</p>";
+            }
+        }
+
         $action = $_GET["action"];
         if (is_writable(".")) { // Check to see if the controller directory is writable.
             if (!file_exists("./start.sh")) { // Check to see if the script hasn't been created yet.
@@ -38,45 +73,14 @@ include "./utils.php";
             }
         }
         if ($action == "start") {
-            if (is_writable("./start.sh")) {
-                if ($config["log_output"] == true) { // Check to see if Marksman is configured to log the output of Assassin.
-                    file_put_contents("./start.sh", "cd " . $config["instance_directory"] . "; python3 " . $config["instance_directory"] . "/main.py > marksmanoutput" . round(time()) . ".txt"); // Update the start script.
-                } else { // Marksman is not configured to log the output of Assassin.
-                    file_put_contents("./start.sh", "cd " . $config["instance_directory"] . "; python3 " . $config["instance_directory"] . "/main.py &"); // Update the start script.
-                }
-            } else {
-                echo "<p class=\"error\">The start.sh script is not writable.</p>";
-                exit();
-            }
-            if (file_exists("./start.sh")) { // Verify that the start script exists.
-                if (is_alive($config) == false) {
-                    $alerts_file_path = $config["interface_directory"] . "/alerts.json";
-                    $status_file_path = $config["interface_directory"] . "/status.json";
-                    if (is_dir($config["interface_directory"]) == true) { // Check to make sure the specified interface directory exists.
-                        if (file_exists($alerts_file_path) == true) { // Check to see if the alert file exists.
-                            if (is_writable($alerts_file_path)) {
-                                file_put_contents($alerts_file_path, "{}"); // Erase the contents of the alert file.
-                            }
-                        }
-                        if (file_exists($status_file_path) == true) { // Check to see if the status log file exists.
-                            if (is_writable($status_file_path)) {
-                                file_put_contents($status_file_path, "{}"); // Erase the contents of the status log file.
-                            }
-                        }
-                    }
-                    $start_command = "sudo -u " . $config["exec_user"] . " sh ./start.sh"; // Prepare the command to start an instance.
-                    shell_exec($start_command . ' > /dev/null 2>&1 &'); // Start an instance.
-                    header("Location: ."); // Reload the page to remove any arguments from the URL.
-                } else {
-                    echo "<p class=\"error\">There seems to already be an instance active.</p>";
-                    echo "<p class=\"error\">Please stop any existing instances before launching another.</p>";
-                }
-            } else {
-                echo "<p class=\"error\">The start script doesn't appear to exist.</p>";
-                echo "<p class=\"error\">The program could not be started.</p>";
-            }
+            start_assassin($config);
         } else if ($action == "stop") {
             shell_exec("sudo killall python3"); // Kill all Python executables.
+            header("Location: ."); // Reload the page to remove any arguments from the URL.
+        } else if ($action == "restart") {
+            shell_exec("sudo killall python3"); // Kill all Python executables.
+            sleep(1);
+            start_assassin($config);
             header("Location: ."); // Reload the page to remove any arguments from the URL.
         }
         ?>
@@ -95,6 +99,7 @@ include "./utils.php";
                 echo $start_button;
                 echo $stop_button;
                 ?>
+                <a class="button" role="button" id="restartbutton" style="color:#ffffff" role="button" href="?action=restart">Restart</a>
                 <br>
                 <p>The last instance heartbeat was <b id="lastheartbeatdisplay">X</b> seconds ago.</p>
             </div>
