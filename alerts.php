@@ -228,7 +228,7 @@ foreach ($last_alert["traffic_camera"] as $key => $alert) { // Iterate through e
         echo "    <th width=\"20%\">";
         echo "        <p>" . round($alert["dst"]*100)/100 . " miles</p>";
         if ($alert["spd"] !== null and $alert["spd"] > 0) { // Check to see if this camera has speed limit information.
-            echo "        <p>" . round($alert["spd"]) . " mph threshold</p>";
+            echo "        <p>" . round($alert["spd"]*0.621371192) . " mph</p>";
         } else {
             echo "        <p>Unknown threshold</p>";
         }

@@ -23,7 +23,11 @@ include "./utils.php";
     </head>
     <body>
         <div class="navbar" role="navigation">
-            <a class="button" role="button" href="./logout.php">Logout</a>
+            <?php
+            if ($config["interface_password"] !== "") {
+                echo '<a class="button" role="button" href="./logout.php">Logout</a>';
+            }
+            ?>
             <a class="button" role="button" href="./settings.php">Settings</a>
             <a class="button" role="button" href="./tools.php">Tools</a><br>
         </div>
@@ -99,7 +103,6 @@ include "./utils.php";
                 echo $start_button;
                 echo $stop_button;
                 ?>
-                <a class="button" role="button" id="restartbutton" style="color:#ffffff" role="button" href="?action=restart">Restart</a>
                 <br>
                 <p>The last instance heartbeat was <b id="lastheartbeatdisplay">X</b> seconds ago.</p>
             </div>
@@ -114,13 +117,15 @@ include "./utils.php";
 
             // Update the control buttons based on the instance status.
             if (status_result.is_alive) {
-                document.getElementById("startbutton").style.color = "#aaaaaa";
-                document.getElementById("startbutton").href = "#";
+                document.getElementById("startbutton").style.color = "#ffffff";
+                document.getElementById("startbutton").href = "?action=restart";
+                document.getElementById("startbutton").innerHTML = "Restart";
                 document.getElementById("stopbutton").style.color = "#ffffff";
                 document.getElementById("stopbutton").href = "?action=stop";
             } else {
                 document.getElementById("startbutton").style.color = "#ffffff";
                 document.getElementById("startbutton").href = "?action=start";
+                document.getElementById("startbutton").innerHTML = "Start";
                 document.getElementById("stopbutton").style.color = "#aaaaaa";
                 document.getElementById("stopbutton").href = "?action=stop";
             }

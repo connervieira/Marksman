@@ -16,7 +16,7 @@ if (file_exists($config_database_name) == false) { // Check to see if the databa
     $configuration_database_file = fopen($config_database_name, "w") or die("Unable to create configuration database file."); // Create the file.
 
     $config["product_name"] = "Marksman";
-    $config["interface_password"] = "assassin";
+    $config["interface_password"] = "";
     $config["heartbeat_threshold"] = 5; // This is the number of seconds old the last heartbeat has to be before the system is considered to be offline.
     $config["theme"] = "dark"; // This determines the supplmentary CSS file that will be used across the interface.
     $config["exec_user"] = "assassin"; // This is the user on the system that will be used to control executables.

@@ -53,8 +53,10 @@ For Marksman to function properly, Apache and PHP must be granted administrative
 1. Open the sudo configuration file with the command `visudo`
 2. Add the line `www-data ALL=(ALL) NOPASSWD: ALL`
 3. Save the document and exit.
-4. You should also make sure that the `marksman` directory is writable.
+4. Make sure that the `marksman` directory is writable.
     - Example: `chmod 777 /var/www/html/marksman`
+5. Ensure the Assassin directory (particularly the configuration file) is writable to Apache
+    - Example: `chmod 777 /home/user/Software/Assassin/*`
 
 
 ### Connecting
@@ -64,8 +66,8 @@ After the basic set-up process is complete, you should be able to view the Marks
 1. Open a web browser of your choice.
 2. Enter the URL for your Marksman installation.
     - Example: `http://192.168.0.76/marksman/`
-3. After the login page appears, enter the default password, `assassin`.
-4. Once you've logged in, you should see the main interface.
+3. At this point, you should see the main Marksman dashboard.
+    - If you are shown a login page, enter the default password, `assassin`.
 
 It should be noted that you're likely to see several errors at this point, given that Marksman hasn't been fully configured yet.
 
@@ -81,6 +83,7 @@ The "Interface Settings" section contains settings relating to the graphical Mar
 
 - The "Password" setting specifies the password used to protect the web interface.
     - This password is not encrypted, nor is it intended to protect the security of the physical device running Marksman.
+    - When this is left as a blank string, authentication is disabled, and anyone with network access to Marksman will be able to control and modify it.
 - The "Heartbeat Threshold" setting determines how many seconds the instance needs to stop responding for before Marksman considers it to be inactive.
     - On slower devices, this value should be raised to prevent long processing times from causing Marksman to mistakenly believe the instance isn't running.
     - On faster devices, this value can be lowered to make the control interface more responsive.

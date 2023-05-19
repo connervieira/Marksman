@@ -1,6 +1,10 @@
 <?php
 include "./config.php";
 
+if ($config["interface_password"] == "") {
+    header("Location: ./index.php");
+}
+
 $force_login_redirect = false;
 include "./authentication.php";
 
