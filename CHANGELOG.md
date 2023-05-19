@@ -42,7 +42,7 @@ March 22nd, 2023
 - Status, warning, and error messages from Assassin are now displayed in the main dashboard.
 - Updated the start-stop system.
     - The "Stop" button is now always active, even when it appears disabled.
-    - Added a "Restart" button to quickly stop, then start Assassin.
+    - When running, the "Start" button becomes the "Restart" button, which quickly stops, then re-starts Assassin.
     - Moved the Assassin start system to a function to make the control script more organized.
     - The start.sh script placeholder is now created when the index pages loads, rather than the first time the "Start" button is pressed.
 - Added the ability to switch between requiring and not requiring authentication.
