@@ -219,8 +219,8 @@ if ($_POST["theme"] == "dark"  or $_POST["theme"] == "light") { // Make sure the
                             if ($_POST["general>alpr_alerts>enabled"] == "on") { $instance_config["general"]["alpr_alerts"]["enabled"] = true; } else { $instance_config["general"]["alpr_alerts"]["enabled"] = false; }
                             $instance_config["general"]["alpr_alerts"]["loaded_radius"] = floatval($_POST["general>alpr_alerts>loaded_radius"]);
                             $instance_config["general"]["alpr_alerts"]["alert_range"] = floatval($_POST["general>alpr_alerts>alert_range"]);
-                            $instance_config["general"]["alpr_alerts"]["angle_threshold"] = floatval($_POST["general>alpr_alerts>angle_threshold"]);
-                            $instance_config["general"]["alpr_alerts"]["direction_threshold"] = floatval($_POST["general>alpr_alerts>direction_threshold"]);
+                            $instance_config["general"]["alpr_alerts"]["filters"]["angle_threshold"] = floatval($_POST["general>alpr_alerts>filters>angle_threshold"]);
+                            $instance_config["general"]["alpr_alerts"]["filters"]["direction_threshold"] = floatval($_POST["general>alpr_alerts>filters>direction_threshold"]);
 
 
                             // Predator integration configuration.
@@ -301,7 +301,7 @@ if ($_POST["theme"] == "dark"  or $_POST["theme"] == "light") { // Make sure the
                             <div class="buffer">
                                 <h5>Over Speed</h5>
                                 <label for="general>gps>alerts>overspeed>enabled">Enabled:</label> <input type="checkbox" id="general>gps>alerts>overspeed>enabled" name="general>gps>alerts>overspeed>enabled" <?php if ($instance_config["general"]["gps"]["alerts"]["overspeed"]["enabled"]) { echo "checked"; } ?>><br><br>
-                                <label for="general>gps>alerts>overspeed>max_speed">Max Speed:</label> <input type="number" id="general>gps>alerts>overspeed>max_speed" name="general>gps>alerts>overspeed>max_speed" min="0" max="1000" step="1" placeholder="400" value="<?php echo $instance_config["general"]["gps"]["alerts"]["overspeed"]["max_speed"]; ?>"><br><br>
+                                <label for="general>gps>alerts>overspeed>max_speed">Max Speed:</label> <input type="number" id="general>gps>alerts>overspeed>max_speed" name="general>gps>alerts>overspeed>max_speed" min="0" max="1000" step="1" placeholder="400" value="<?php echo $instance_config["general"]["gps"]["alerts"]["overspeed"]["max_speed"]; ?>"> <span>mph</span><br><br>
                                 <label for="general>gps>alerts>overspeed>prioritize_highest">Prioritize Highest:</label> <input type="checkbox" id="general>gps>alerts>overspeed>prioritize_highest" name="general>gps>alerts>overspeed>prioritize_highest" <?php if ($instance_config["general"]["gps"]["alerts"]["overspeed"]["prioritize_highest"]) { echo "checked"; } ?>><br><br>
                             </div>
                             <div class="buffer">
@@ -353,8 +353,17 @@ if ($_POST["theme"] == "dark"  or $_POST["theme"] == "light") { // Make sure the
                             <label for="general>alpr_alerts>enabled">Enabled:</label> <input type="checkbox" id="general>alpr_alerts>enabled" name="general>alpr_alerts>enabled" <?php if ($instance_config["general"]["alpr_alerts"]["enabled"]) { echo "checked"; } ?>><br><br>
                             <label for="general>alpr_alerts>loaded_radius">Loaded Radius:</label> <input type="number" id="general>alpr_alerts>loaded_radius" name="general>alpr_alerts>loaded_radius" step="10" placeholder="500" min="0" max="5000" value="<?php echo $instance_config["general"]["alpr_alerts"]["loaded_radius"]; ?>"> <span>miles</span><br><br>
                             <label for="general>alpr_alerts>alert_range">Alert Range:</label> <input type="number" id="general>alpr_alerts>alert_range" name="general>alpr_alerts>alert_range" step="0.1" placeholder="1" min="0" max="10" value="<?php echo $instance_config["general"]["alpr_alerts"]["alert_range"]; ?>"> <span>miles</span><br><br>
-                            <label for="general>alpr_alerts>angle_threshold">Angle Threshold:</label> <input type="number" id="general>alpr_alerts>angle_threshold" name="general>alpr_alerts>angle_threshold" step="1" placeholder="50" min="0" max="180" value="<?php echo $instance_config["general"]["alpr_alerts"]["angle_threshold"]; ?>"> <span>degrees</span><br><br>
-                            <label for="general>alpr_alerts>direction_threshold">Direction Threshold:</label> <input type="number" id="general>alpr_alerts>direction_threshold" name="general>alpr_alerts>direction_threshold" step="1" placeholder="20" min="0" max="180" value="<?php echo $instance_config["general"]["alpr_alerts"]["direction_threshold"]; ?>"> <span>degrees</span><br><br>
+                            <div class="buffer">
+                                <h5>Filters</h5>
+                                <label for="general>alpr_alerts>filters>angle_threshold">Angle Threshold:</label> <input type="number" id="general>alpr_alerts>filters>angle_threshold" name="general>alpr_alerts>filters>angle_threshold" step="1" placeholder="50" min="0" max="180" value="<?php echo $instance_config["general"]["alpr_alerts"]["filters"]["angle_threshold"]; ?>"> <span>degrees</span><br><br>
+                                <label for="general>alpr_alerts>filters>direction_threshold">Direction Threshold:</label> <input type="number" id="general>alpr_alerts>filters>direction_threshold" name="general>alpr_alerts>filters>direction_threshold" step="1" placeholder="20" min="0" max="180" value="<?php echo $instance_config["general"]["alpr_alerts"]["filters"]["direction_threshold"]; ?>"> <span>degrees</span><br><br>
+                                <div class="buffer">
+                                    <h6>Duplicate Merging</h6>
+                                    <label for="general>alpr_alerts>filters>duplicate_filtering>enabled">Enabled:</label> <input type="checkbox" id="general>alpr_alerts>filters>duplicate_filtering>enabled" name="general>alpr_alerts>filters>duplicate_filtering>enabled" <?php if ($instance_config["general"]["alpr_alerts"]["filters"]["duplicate_filtering"]["enabled"]) { echo "checked"; } ?>><br><br>
+                                    <label for="general>alpr_alerts>filters>duplicate_filtering>distance">Distance:</label> <input type="number" id="general>alpr_alerts>filters>duplicate_filtering>distance" name="general>alpr_alerts>filters>duplicate_filtering>distance" step="0.001" placeholder="0.01" min="0" max="0.2" value="<?php echo $instance_config["general"]["alpr_alerts"]["filters"]["duplicate_filtering"]["distance"]; ?>"> <span>miles</span><br><br>
+                                    <label for="general>alpr_alerts>filters>duplicate_filtering>angle">Angle:</label> <input type="number" id="general>alpr_alerts>filters>duplicate_filtering>angle" name="general>alpr_alerts>filters>duplicate_filtering>angle" step="5" placeholder="20" min="0" max="180" value="<?php echo $instance_config["general"]["alpr_alerts"]["filters"]["duplicate_filtering"]["angle"]; ?>"> <span>degrees</span><br><br>
+                                </div>
+                            </div>
                         </div>
                         <div class="buffer">
                             <h4>Predator Integration</h4>
