@@ -47,3 +47,4 @@ March 22nd, 2023
     - The start.sh script placeholder is now created when the index pages loads, rather than the first time the "Start" button is pressed.
 - Added the ability to switch between requiring and not requiring authentication.
     - By default, authentication is not required.
+- Added vehicle on-board diagnostic alert handling.
