@@ -137,6 +137,84 @@ foreach ($last_alert["gps"] as $key => $alert) { // Iterate through each GPS ale
 
 
 
+// Display OBD alerts.
+// Olive
+foreach ($last_alert["obd"] as $key => $alert) { // Iterate through each OBD alert.
+    echo "<table class=\"alert olive\"><tr>";
+    echo "    <th width=\"5%\"><img src=\"img/alerts/vehicle.svg\" height=\"50px\"></th>";
+    if ($key == "speed") {
+        echo "    <th width=\"45%\">";
+        echo "        <h4>Vehicle Diagnostics</h4>";
+        echo "        <p>Ground Speed</p>";
+        echo "    </th>";
+        echo "    <th width=\"50%\">";
+        echo "        <p><b>" . round($alert["value"]) . " mph</b>";
+        if ($alert["alert"] == "high") {
+            echo " exceeds the maximum threshold";
+        } else if ($alert["alert"] == "low") {
+            echo " falls below the minimum threshold";
+        }
+        echo ".</p>";
+        echo "    </th>";
+    } else if ($key == "rpm") {
+        echo "    <th width=\"45%\">";
+        echo "        <h4>Vehicle Diagnostics</h4>";
+        echo "        <p>Engine RPM</p>";
+        echo "    </th>";
+        echo "    <th width=\"50%\">";
+        echo "        <p><b>" . round($alert["value"]) . " rpm</b>";
+        if ($alert["alert"] == "high") {
+            echo " exceeds the maximum threshold";
+        } else if ($alert["alert"] == "low") {
+            echo " falls below the minimum threshold";
+        }
+        echo ".</p>";
+        echo "    </th>";
+    } else if ($key == "fuel_level") {
+        echo "    <th width=\"45%\">";
+        echo "        <h4>Vehicle Diagnostics</h4>";
+        echo "        <p>Fuel Level</p>";
+        echo "    </th>";
+        echo "    <th width=\"50%\">";
+        echo "        <p><b>" . round($alert["value"]*100) . "% full</b>";
+        if ($alert["alert"] == "high") {
+            echo " exceeds the maximum threshold";
+        } else if ($alert["alert"] == "low") {
+            echo " falls below the minimum threshold";
+        }
+        echo ".</p>";
+        echo "    </th>";
+    } else if ($key == "airflow") {
+        echo "    <th width=\"45%\">";
+        echo "        <h4>Vehicle Diagnostics</h4>";
+        echo "        <p>Airflow</p>";
+        echo "    </th>";
+        echo "    <th width=\"50%\">";
+        echo "        <p><b>" . round($alert["value"]*100) . " grams per second</b>";
+        if ($alert["alert"] == "high") {
+            echo " exceeds the maximum threshold";
+        } else if ($alert["alert"] == "low") {
+            echo " falls below the minimum threshold";
+        }
+        echo ".</p>";
+        echo "    </th>";
+    } else {
+        echo "    <th width=\"45%\">";
+        echo "        <h4>Vehicle Diagnostics</h4>";
+        echo "        <p>Unknown Alert</p>";
+        echo "    </th>";
+        echo "    <th width=\"50%\">";
+        echo "        <p>An unknown vehicle diagnostic alert occurred.</p>";
+        echo "    </th>";
+    }
+    echo "</tr></table>";
+}
+
+
+
+
+
+
 
 // Display Predator alerts.
 // Red

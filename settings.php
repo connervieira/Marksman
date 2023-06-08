@@ -287,7 +287,8 @@ if ($_POST["theme"] == "dark"  or $_POST["theme"] == "light") { // Make sure the
                             </select><br>
                             <label for="general>gps>speed_source">Speed Source:</label>
                             <select id="general>gps>speed_source" name="general>gps>speed_source">
-                                <option value="hardware" <?php if ($instance_config["general"]["gps"]["speed_source"] == "hardware") { echo "selected"; } ?>>Hardware</option>
+                                <option value="gps" <?php if ($instance_config["general"]["gps"]["speed_source"] == "gps") { echo "selected"; } ?>>GPS</option>
+                                <option value="obd" <?php if ($instance_config["general"]["gps"]["speed_source"] == "obd") { echo "selected"; } ?>>OBD</option>
                                 <option value="calculated" <?php if ($instance_config["general"]["gps"]["speed_source"] == "calculated") { echo "selected"; } ?>>Calculated</option>
                             </select>
                         </div>
