@@ -16,7 +16,7 @@ March 22nd, 2023
 
 ### First Stable Release
 
-*Release date to be determined*
+December 10th, 2023
 
 - Added refresh delay configuration option.
 - Add question mark icon to replace directional icons when there isn't enough information to display accurate data.
