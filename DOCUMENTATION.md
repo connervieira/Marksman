@@ -12,7 +12,7 @@ Marksman and Assassin form a somewhat complex link, and it's important to unders
 - The **instance** refers to the instance of Assassin that is being controlled by Marksman.
 - The **controller** refers to Marksman, controlling a Assassin instance.
 
-- The **interface directory** is a directory used by Assassin to feed information that will be read by MArksman. Think of this directory as the bridge Assassin uses to active share information as it operates.
+- The **interface directory** is a directory used by Assassin to feed information that will be read by Marksman. Think of this directory as the bridge Assassin uses to actively share information with external programs as it operates.
 - The **instance directory** is the main Assassin directory, containing all of the scripts and support files used by the back-end.
 - The **controller directory** is the main Marksman directory, containing all of the scripts and support files used by the front-end controller interface.
 
