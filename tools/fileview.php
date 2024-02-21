@@ -45,7 +45,7 @@ include "../authentication.php";
                             $file_contents = explode("\n", file_get_contents($file));
                             echo "<p>";
                             foreach ($file_contents as $line) {
-                                echo "<span>" . $line . "</span><br>";
+                                echo "<span>" . str_replace("    ", "&nbsp;&nbsp;&nbsp;&nbsp;", $line) . "</span><br>";
                             }
                             echo "</p>";
                         } else {

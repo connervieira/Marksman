@@ -48,3 +48,4 @@ December 10th, 2023
 - Added the ability to switch between requiring and not requiring authentication.
     - By default, authentication is not required.
 - Added vehicle on-board diagnostic alert handling.
+- Improved the formatting of the file viewing tool output.

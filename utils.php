@@ -69,7 +69,6 @@ function verify_permissions($config) {
 
     if ($command_output !== "verify") { // Check to see if the command output differs from the expected output.
         echo "<p class=\"error\">PHP does not have the necessary permissions to manage this system as '" . $config["exec_user"] . "' using the '" . shell_exec("whoami") . "' user.</p>"; // Display an error briefly explaining the problem.
-        exit(); // Terminate the script.
     }
 
 
