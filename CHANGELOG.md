@@ -18,7 +18,6 @@ March 22nd, 2023
 
 December 10th, 2023
 
-- Added refresh delay configuration option.
 - Add question mark icon to replace directional icons when there isn't enough information to display accurate data.
 - Updated GPS alert handling.
     - GPS over-speed alerts are now rounded to 2 decimal places.
@@ -51,3 +50,6 @@ December 10th, 2023
     - Fixed a problem where Marksman would encounter a fatal error if the Assassin interface directory was missing.
     - The interface is now detected automatically, and no longer needs to be set in the Marksman configuration.
 - Added SystemD service management utility.
+- Added more controller configuration options.
+    - Added refresh delay configuration option.
+    - Added coordinate precision configuration option.
