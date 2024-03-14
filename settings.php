@@ -92,19 +92,6 @@ if ($_POST["theme"] == "dark"  or $_POST["theme"] == "light") { // Make sure the
                         $valid = false; // Indicate that the configuration is not valid, and shouldn't be saved.
                     }
 
-                    if ($_POST["interface_directory"] == "") { // If the interface directory input, was left blank, then attempt to autofill it.
-                        $instance_configuration_path = $config["instance_directory"] . "/config.json"; // This is the file path to the configuration file of the Assassin instance.
-                        if (file_exists($instance_configuration_path)) { // Check to see if the instance configuration file exists.
-                            $instance_config = json_decode(file_get_contents($config["instance_directory"] . "/config.json"), true); // Load the instance configuration file.
-                            $_POST["interface_directory"] = $instance_config["external"]["local"]["interface_directory"]; // Auto-fill the interface directory.
-                        }
-                    }
-                    if (is_dir($_POST["interface_directory"])) { // Make sure the interface directory input is actually a directory.
-                        $config["interface_directory"] = $_POST["interface_directory"]; // Save the submitted interface directory option to the configuration array.
-                    } else {
-                        echo "<p class='error'>The specified interface directory does not exist.</p>";
-                        $valid = false; // Indicate that the configuration is not valid, and shouldn't be saved.
-                    }
 
                     if (floatval($_POST["refresh_delay"]) > 0 and floatval($_POST["refresh_delay"]) <= 5000) { // Make sure the refresh delay input is within the expected range.
                         $config["refresh_delay"] = floatval($_POST["refresh_delay"]); // Save the submitted refresh delay option to the configuration array.

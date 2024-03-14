@@ -25,13 +25,10 @@ December 10th, 2023
     - Added support for frozen GPS alerts.
     - Added support for GPS diagnostic alerts.
 - Refined permissions verification process.
-- Fixed a problem where Marksman would encounter a fatal error if the Assassin interface directory was missing.
 - The connected Assassin instance configuration can now be modified directly from the Marksman settings page.
     - Commonly modified settings can be changed from the graphical interface.
 - Made the interface more compact for better usability on smaller displays.
 - Removed an improper reference to Predator in an input placeholder.
-- Added auto-fill to the "Interface Directory" field when left blank.
-    - If no interface directory is provided, Marksman will attempt to pull it from the instance configuration file.
 - Added logo as the web-page favicon.
 - Updated aircraft alert display.
     - Aircraft alerts now display the aircraft's identifier.
@@ -42,6 +39,7 @@ December 10th, 2023
 - Status, warning, and error messages from Assassin are now displayed in the main dashboard.
 - Updated the start-stop system.
     - The "Stop" button is now always active, even when it appears disabled.
+        - This allows frozen Assassin instances to be killed even when Marksman doesn't recognize them as being alive.
     - When running, the "Start" button becomes the "Restart" button, which quickly stops, then re-starts Assassin.
     - Moved the Assassin start system to a function to make the control script more organized.
     - The start.sh script placeholder is now created when the index pages loads, rather than the first time the "Start" button is pressed.
@@ -49,3 +47,7 @@ December 10th, 2023
     - By default, authentication is not required.
 - Added vehicle on-board diagnostic alert handling.
 - Improved the formatting of the file viewing tool output.
+- Updated interface directory handling.
+    - Fixed a problem where Marksman would encounter a fatal error if the Assassin interface directory was missing.
+    - The interface is now detected automatically, and no longer needs to be set in the Marksman configuration.
+- Added SystemD service management utility.

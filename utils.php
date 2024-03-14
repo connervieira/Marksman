@@ -72,9 +72,9 @@ function verify_permissions($config) {
     }
 
 
-    if (is_writable("./") == false) { // Check to se if the controller interface's root directory is writable.
+    if (is_writable("./") == false) { // Check to see if the controller's root directory is writable.
         echo "<p class=\"error\">The " . $config["product_name"] . " directory is not writable. Please verify the permissions of the " . getcwd() . " directory.</p>";
-    } else if (is_writable("./start.sh") == false and file_exists("./start.sh") == true) { // Check to see if the controller interface's start script is writable.
+    } else if (is_writable("./start.sh") == false and file_exists("./start.sh") == true) { // Check to see if the controller's start script is writable.
         echo "<p class=\"error\">The start.sh script in the " . getcwd() . " directory is not writable.</p>";
     }
 
@@ -90,10 +90,8 @@ function verify_permissions($config) {
         echo "<a class=\"button\" href=\"./settings.php\">Settings</a>";
     }
     if (is_dir($config["interface_directory"]) == false) { // Check to see if the Assassin interface directory exists.
-        echo "<p class=\"error\">The interface directory doesn't appear to exist at " . $config["interface_directory"] . ". Please adjust the controller configuration.</p>";
-        echo "<a class=\"button\" href=\"./settings.php\">Settings</a>";
+        echo "<p class=\"warning\">The interface directory doesn't appear to exist at " . $config["interface_directory"] . ". This may be the case if Assassin hasn't been started yet.</p>";
     }
-
 }
 
 

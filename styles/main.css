@@ -47,6 +47,7 @@ table p, table h4 {
     padding: 10px;
     border-radius: 5px;
     border: none;
+    line-height: 20px;
 }
 
 .navbar {
@@ -67,6 +68,9 @@ table p, table h4 {
 }
 .error {
     color: #ff0000;
+}
+.warning {
+    color: #ffff00;
 }
 
 

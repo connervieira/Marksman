@@ -22,7 +22,6 @@ if (file_exists($config_database_name) == false) { // Check to see if the databa
     $config["exec_user"] = "assassin"; // This is the user on the system that will be used to control executables.
     $config["log_output"] = false; // This determines whether or not Marksman will direct Assassin's console output to a log file.
     $config["instance_directory"] = "/home/assassin/Software/Assassin/instance"; // This defines where the Assassin directory can be found.
-    $config["interface_directory"] = "/home/assassin/Software/Assassin/interface"; // This defines where Assassin's interface directory can be found.
     $config["refresh_delay"] = 100; // This determines how many milliseconds the interface will wait between refreshes.
     $config["precision"]["coordinates"] = 4; // This determines how many decimal places coordinates will be shown to.
 
@@ -38,5 +37,18 @@ if (file_exists($config_database_name) == true) { // Check to see if the item da
 }
 
 
+$instance_configuration_path = $config["instance_directory"] . "/config.json"; // This is the file path to the configuration file of the Assassin instance.
+if (file_exists($instance_configuration_path)) { // Check to see if the instance configuration file exists.
+    $instance_config = json_decode(file_get_contents($config["instance_directory"] . "/config.json"), true); // Load the instance configuration file.
+    if ($instance_config["external"]["local"]["enabled"] == true) {
+        $_POST["interface_directory"] = $instance_config["external"]["local"]["interface_directory"]; // Auto-fill the interface directory.
+    } else {
+        echo "<p class=\"error\">The local interface directory is disabled in Assassin's configuration. " . htmlspecialchars($config["product_name"]) . " requires this feature to be enabled to function.</p>"; // Inform the user that the database failed to load.
+        exit(); // Terminate the script.
+    }
+} else {
+    echo "<p class=\"error\">The interface directory could not be identified from the instance configuration file. It is possible the Assassin configuration file is corrupt.</p>"; // Inform the user that the database failed to load.
+    exit(); // Terminate the script.
+}
 
 ?>

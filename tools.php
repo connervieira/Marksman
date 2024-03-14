@@ -29,11 +29,15 @@ include "./authentication.php";
         <main>
             <div class="buffer">
                 <h2>Tools</h2>
-                <p>The tools found here can be used to maintain Assassin, and diagnose problems. However, they can also damage the instance if used incorrectly. Exercise caution when using these tools.</p>
+                <p>The tools found here can be used to maintain Assassin and diagnose problems. However, they can also damage the instance if used incorrectly. Exercise caution when using these tools.</p>
                 <div class="buffer">
                     <h3>Files</h3>
                     <a class="button" href="./tools/fileview.php">View</a>
-                    <a class="button" href="./tools/filedownload.php">Download</a>
+                    <a class="button" href="./tools/filedownload.php">Download</a><br><br>
+                </div>
+                <div class="buffer">
+                    <h3>Management</h3>
+                    <a class="button" href="./service.php">Service</a><br><br>
                 </div>
             </div>
         </main>

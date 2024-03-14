@@ -248,7 +248,7 @@ foreach ($last_alert["predator"] as $plate => $triggers) { // Iterate through ea
 // Display drone alerts.
 // Magenta
 foreach ($last_alert["drone"] as $alert) { // Iterate through each automonous threat alert.
-    echo "<table class=\"alert cyan\"><tr>";
+    echo "<table class=\"alert magenta\"><tr>";
     echo "    <th width=\"5%\"><img src=\"img/alerts/drone.svg\" style=\"height:50px;transform:rotate(" . $alert["relativeheading"] . "deg);\"></th>";
     echo "    <th width=\"40%\">";
     echo "        <h4>Autonomous</h4>";
@@ -294,7 +294,7 @@ foreach ($last_alert["bluetooth"] as $alert) { // Iterate through each Bluetooth
 
 // Display traffic camera alerts.
 // Blue
-foreach ($last_alert["traffic_camera"] as $key => $alert) { // Iterate through each time-based attention alert.
+foreach ($last_alert["traffic_camera"] as $key => $alert) { // Iterate through each traffic camera alert.
     echo "<table class=\"alert blue\"><tr>";
     echo "    <th width=\"5%\"><img src=\"img/alerts/trafficamera.svg\" height=\"50px\"></th>";
     echo "    <th width=\"5%\"><img src=\"img/arrow.svg\" style=\"height:50px;transform: rotate(" . $alert["direction"] . "deg);\"></th>";
