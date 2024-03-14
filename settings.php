@@ -124,7 +124,7 @@ if ($_POST["theme"] == "dark"  or $_POST["theme"] == "light") { // Make sure the
                 ?>
                 <form method="post">
                     <div class="buffer">
-                        <h3>Interface Settings</h3>
+                        <h3>Controller Settings</h3>
                         <label for="interface_password">Password:</label> <input type="text" id="interface_password" name="interface_password" placeholder="password" pattern="[a-zA-Z0-9]{0,100}" value="<?php echo $config["interface_password"]; ?>"><br><br>
                         <label for="heartbeat_threshold">Heartbeat Threshold:</label> <input type="number" id="heartbeat_threshold" name="heartbeat_threshold" placeholder="5" min="1" max="20" value="<?php echo $config["heartbeat_threshold"]; ?>"> <span>seconds</span><br><br>
                         <label for="theme">Theme:</label>
@@ -132,6 +132,8 @@ if ($_POST["theme"] == "dark"  or $_POST["theme"] == "light") { // Make sure the
                             <option value="dark" <?php if ($config["theme"] == "dark") { echo "selected"; } ?>>Dark</option>
                             <option value="light" <?php if ($config["theme"] == "light") { echo "selected"; } ?>>Light</option>
                         </select><br><br>
+                        <label for="precision_coordinates">Coordinate Precision:</label> <input type="number" id="precision_coordinates" name="precision_coordinates" placeholder="4" step="1" min="0" max="10" value="<?php echo $config["precision"]["coordinates"]; ?>"> <span>places</span><br><br>
+                        <label for="refresh_delay">Refresh Interval:</label> <input type="number" id="refresh_delay" name="refresh_delay" placeholder="100" step="50" min="1" max="5000" value="<?php echo $config["refresh_delay"]; ?>"> <span>milliseconds</span><br><br>
                     </div>
 
                     <div class="buffer">
@@ -139,9 +141,6 @@ if ($_POST["theme"] == "dark"  or $_POST["theme"] == "light") { // Make sure the
                         <label for="exec_user">Execution User:</label> <input type="text" id="exec_user" name="exec_user" placeholder="Username" pattern="[a-zA-Z0-9]{1,100}" value="<?php echo $config["exec_user"]; ?>"><br><br>
                         <label for="log_output">Log Output:</label> <input type="checkbox" id="log_output" name="log_output" <?php if ($config["log_output"] == true) { echo "checked"; } ?>><br><br>
                         <label for="instance_directory">Instance Directory:</label> <input type="text" id="instance_directory" name="instance_directory" placeholder="/home/assassin/Assassin" value="<?php echo $config["instance_directory"]; ?>"><br><br>
-                        <label for="interface_directory">Interface Directory:</label> <input type="text" id="interface_directory" name="interface_directory" placeholder="/home/assassin/Instance/" value="<?php echo $config["interface_directory"]; ?>"><br><br>
-                        <label for="refresh_delay">Refresh Delay:</label> <input type="number" id="refresh_delay" name="refresh_delay" placeholder="100" step="1" min="1" max="5000" value="<?php echo $config["refresh_delay"]; ?>"> <span>milliseconds</span><br><br>
-                        <label for="precision_coordinates">Coordinate Precision:</label> <input type="number" id="precision_coordinates" name="precision_coordinates" placeholder="4" step="1" min="0" max="10" value="<?php echo $config["precision"]["coordinates"]; ?>"> <span>places</span><br><br>
 
                         <br><br><input type="submit" class="button" value="Submit" name="controller">
                     </div>

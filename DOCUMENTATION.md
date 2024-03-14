@@ -79,7 +79,7 @@ Once you've verified that Marksman is working as expected, you should configure 
 1. Click the "Settings" button on the main Marksman dashboard.
 2. Adjust settings as necessary or desired.
 
-The "Interface Settings" section contains settings relating to the graphical Marksman interface itself.
+The "Controller Settings" section contains settings relating to the Marksman controller interface.
 
 - The "Password" setting specifies the password used to protect the web interface.
     - This password is not encrypted, nor is it intended to protect the security of the physical device running Marksman.
@@ -90,14 +90,17 @@ The "Interface Settings" section contains settings relating to the graphical Mar
     - It's better to err on the side of too high, since values that are too low can lead to unexpected behavior, like multiple instances running at once.
 - The "Theme" setting determines the aesthetic theme that the web interface uses.
     - This setting is strictly visual, and doesn't influence functionality in any significant way.
+- The "Coordinate Precision" setting determines how many decimal places Marksman will round off coordinates to.
+- The "Refresh Interval" setting determines the delay (in milliseconds) between refreshes of the interface.
+    - Faster values will improve responsiveness, but increase network usage.
 
 The "Connection Settings" section contains settings relating to the connection between Marksman and the Assassin instance.
 
 - The "Execution User" determines which user on the system Marksman will run the Assassin instance is.
     - This user does not need administrative privilege.
     - In most situations, this should be your username on the system.
-- The "Instance Directory" setting should be used to specify the absolute directory path of the Marksman instance directory.
-- The "Interface Directory" setting should be used to specify the absolute directory path of the Marksman interface directory.
+        - You can determine your current user by running the `whoami` command.
+- The "Instance Directory" setting should be used to specify the absolute directory path of the Assassin instance directory.
 
 
 ## Usage
