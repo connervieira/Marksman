@@ -1,7 +1,7 @@
 <?php
 include "./config.php";
 
-if ($config["interface_password"] !== "") {
+if ($config["interface_password"] !== "") { // Only require authentication if the interface password is not blank.
     session_start();
     if ($_SESSION['authid'] == "marksman") {
         $username = $_SESSION['username'];
