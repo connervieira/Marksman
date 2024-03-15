@@ -48,8 +48,17 @@ December 10th, 2023
 - Improved the formatting of the file viewing tool output.
 - Updated interface directory handling.
     - Fixed a problem where Marksman would encounter a fatal error if the Assassin interface directory was missing.
-    - The interface is now detected automatically, and no longer needs to be set in the Marksman configuration.
 - Added SystemD service management utility.
 - Added more controller configuration options.
     - Added refresh delay configuration option.
     - Added coordinate precision configuration option.
+
+## Version 1.2
+
+*Release date to be determined*
+
+- Re-organized controller configuration
+    - Changed the headers of the controller configuration section.
+- Added more instance configuration options.
+    - Added status lighting configuration.
+- The interface is now detected automatically, and no longer needs to be set in the Marksman configuration.

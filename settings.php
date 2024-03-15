@@ -161,6 +161,10 @@ if ($_POST["theme"] == "dark"  or $_POST["theme"] == "light") { // Make sure the
                             $instance_config["general"]["gps"]["speed_source"] = strval($_POST["general>gps>speed_source"]);
                             $instance_config["general"]["gps"]["provider"] = strval($_POST["general>gps>provider"]);
 
+                            if ($_POST["display>status_lighting>enabled"] == "on") { $instance_config["display"]["status_lighting"]["enabled"] = true; } else { $instance_config["display"]["status_lighting"]["enabled"] = false; }
+                            $instance_config["display"]["status_lighting"]["delay"] = floatval($_POST["display>status_lighting>delay"]);
+                            $instance_config["display"]["status_lighting"]["base_url"] = $_POST["display>status_lighting>base_url"];
+
 
                             // GPS alert configuration.
                             if ($_POST["general>gps>alerts>enabled"] == "on") { $instance_config["general"]["gps"]["alerts"]["enabled"] = true; } else { $instance_config["general"]["gps"]["alerts"]["enabled"] = false; }
@@ -277,6 +281,15 @@ if ($_POST["theme"] == "dark"  or $_POST["theme"] == "light") { // Make sure the
                                 <option value="obd" <?php if ($instance_config["general"]["gps"]["speed_source"] == "obd") { echo "selected"; } ?>>OBD</option>
                                 <option value="calculated" <?php if ($instance_config["general"]["gps"]["speed_source"] == "calculated") { echo "selected"; } ?>>Calculated</option>
                             </select>
+                        </div>
+                        <div class="buffer">
+                            <h4>Status Lighting</h4>
+                            <label for="display>status_lighting>enabled">Enabled:</label> <input type="checkbox" id="display>status_lighting>enabled" name="display>status_lighting>enabled" <?php if ($instance_config["display"]["status_lighting"]["enabled"]) { echo "checked"; } ?>><br><br>
+                            <label for="display>status_lighting>delay">Delay:</label> <input type="number" id="display>status_lighting>delay" name="display>status_lighting>delay" min="0" max="5" step="0.1" placeholder="0.5" value="<?php echo $instance_config["display"]["status_lighting"]["delay"]; ?>"> <span>seconds</span><br><br>
+                            <div class="buffer">
+                                <h5>URLs</h5>
+                                <label for="display>status_lighting>base_url">Base URL:</label> <input type="text" id="display>status_lighting>base_url" name="display>status_lighting>base_url" placeholder="http://wled.local/win&A=255&FX=0" value="<?php echo $instance_config["display"]["status_lighting"]["base_url"]; ?>"><br><br>
+                            </div>
                         </div>
                     </div>
                     <div class="buffer">
