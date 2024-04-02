@@ -47,8 +47,7 @@ if (file_exists($instance_configuration_path)) { // Check to see if the instance
         exit(); // Terminate the script.
     }
 } else {
-    echo "<p class=\"error\">The interface directory could not be identified from the instance configuration file. It is possible the Assassin configuration file is corrupt.</p>"; // Inform the user that the database failed to load.
-    exit(); // Terminate the script.
+    echo "<p class=\"error\">The interface directory could not be identified from the instance configuration file. It is possible the Assassin configuration file is corrupt, or the incorrect Assassin instance directory is set.</p>"; // Inform the user that the database failed to load.
 }
 
 ?>

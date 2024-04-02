@@ -141,6 +141,7 @@ if ($_POST["theme"] == "dark"  or $_POST["theme"] == "light") { // Make sure the
                         <label for="exec_user">Execution User:</label> <input type="text" id="exec_user" name="exec_user" placeholder="Username" pattern="[a-zA-Z0-9]{1,100}" value="<?php echo $config["exec_user"]; ?>"><br><br>
                         <label for="log_output">Log Output:</label> <input type="checkbox" id="log_output" name="log_output" <?php if ($config["log_output"] == true) { echo "checked"; } ?>><br><br>
                         <label for="instance_directory">Instance Directory:</label> <input type="text" id="instance_directory" name="instance_directory" placeholder="/home/assassin/Assassin" value="<?php echo $config["instance_directory"]; ?>"><br><br>
+                        <label for="interface_directory">Interface Directory:</label> <input type="text" id="interface_directory" name="instance_directory" placeholder="/home/assassin/Assassin" value="<?php echo $config["interface_directory"]; ?>" style='color:#aaaaaa;' disabled><br><br>
 
                         <br><br><input type="submit" class="button" value="Submit" name="controller">
                     </div>
