@@ -133,7 +133,7 @@ if ($_POST["theme"] == "dark"  or $_POST["theme"] == "light") { // Make sure the
                             <option value="light" <?php if ($config["theme"] == "light") { echo "selected"; } ?>>Light</option>
                         </select><br><br>
                         <label for="precision_coordinates">Coordinate Precision:</label> <input type="number" id="precision_coordinates" name="precision_coordinates" placeholder="4" step="1" min="0" max="10" value="<?php echo $config["precision"]["coordinates"]; ?>"> <span>places</span><br><br>
-                        <label for="refresh_delay">Refresh Interval:</label> <input type="number" id="refresh_delay" name="refresh_delay" placeholder="100" step="50" min="1" max="5000" value="<?php echo $config["refresh_delay"]; ?>"> <span>milliseconds</span><br><br>
+                        <label for="refresh_delay">Refresh Interval:</label> <input type="number" id="refresh_delay" name="refresh_delay" placeholder="100" step="50" min="0" max="5000" value="<?php echo $config["refresh_delay"]; ?>"> <span>milliseconds</span><br><br>
                     </div>
 
                     <div class="buffer">
