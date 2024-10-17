@@ -219,28 +219,34 @@ foreach ($last_alert["obd"] as $key => $alert) { // Iterate through each OBD ale
 // Display Predator alerts.
 // Red
 foreach ($last_alert["predator"] as $plate => $triggers) { // Iterate through each alert in the Predator integration alerts.
-    echo "<table class=\"alert red\"><tr>";
-    echo "    <th width=\"5%\"><img src=\"img/alerts/predator.svg\" height=\"50px\"></th>";
-    echo "    <th width=\"35%\">";
-    echo "        <h4>Predator</h4>";
-    echo "        <p>ALPR Alert</p>";
-    echo "    </th>";
-    echo "    <th width=\"25%\">";
-    echo "        <p>" . $plate . "</p>";
-    echo "    </th>";
-    if (sizeof($triggers) <= 1) {
-        echo "<th width=\"35%\">";
-        foreach ($triggers as $rule => $info) {
-            echo "<p>" . $rule . "</p>";
+    foreach ($triggers as $rule => $info) {
+        echo "<table class=\"alert red\"><tr>";
+        echo "    <th width=\"5%\"><img src=\"img/alerts/predator.svg\" height=\"50px\"></th>";
+        echo "    <th width=\"35%\">";
+        echo "        <h4>Predator</h4>";
+        echo "        <p>ALPR Alert</p>";
+        echo "    </th>";
+        echo "    <th width=\"25%\">";
+        echo "        <p>" . $plate . "</p>";
+        if (strlen($info["name"]) > 0) {
+            echo "        <p>" . $info["name"] . "</p>";
+        } else if (strlen($info["description"]) > 0) {
+            echo "        <p>" . $info["description"] . "</p>";
         }
-        echo "</th>";
-    } else if (sizeof($triggers) == 2) {
-        echo "<th width=\"35%\">";
-        foreach ($triggers as $rule => $info) {
-            echo "<p>" . $rule . "</p>";
+        echo "    </th>";
+        echo "    <th width=\"35%\">";
+        echo "        <p>" . $rule . "</p>";
+        $vehicle_string = "";
+        if (strlen($info["vehicle"]["color"]) > 0) { $vehicle_string .= strval($info["vehicle"]["color"]) . " "; }
+        if (intval($info["vehicle"]["year"]) > 0) { $vehicle_string .= strval($info["vehicle"]["year"]) . " "; }
+        if (strlen($info["vehicle"]["make"]) > 0) { $vehicle_string .= strval($info["vehicle"]["make"]) . " "; }
+        if (strlen($info["vehicle"]["model"]) > 0) { $vehicle_string .= strval($info["vehicle"]["model"]) . " "; }
+        if (strlen($vehicle_string) > 0) {
+            $vehicle_string = substr($vehicle_string, 0, strlen($vehicle_string)-1); // Remove the last character, since it will always be a space.
+            echo "        <p>" . $vehicle_string . "</p>";
         }
-        echo "</th>";
     }
+    echo "    </th>";
     echo "</tr></table>";
 }
 

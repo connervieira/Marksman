@@ -62,3 +62,7 @@ December 10th, 2023
 - Added more instance configuration options.
     - Added status lighting configuration.
 - The interface is now detected automatically, and no longer needs to be set in the Marksman configuration.
+- Tweaked the warning message color to be slightly more orange for sake of readability in light mode.
+- Fixed an issue where Marksman would encounter a fatal error if the status or heartbeat log wasn't present.
+- Marksman no longer shows a warning when the interface directory does not exist.
+- Added support for Predator integration alerts.

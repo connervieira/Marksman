@@ -18,19 +18,24 @@ function last_heartbeat($config) {
         if (file_exists($alerts_file_path)) { // Check to see if the alert file exists.
             $heartbeat_log = array_keys(json_decode(file_get_contents($alerts_file_path), true)); // Load the heartbeat log from the JSON data in the alerts file.
         } else { // If the heartbeat file doesn't exist, then load a blank placeholder instead.
-            $heartbeat_log = array(); // Set the heartbeat log to an empty array.
+            $heartbeat_log = array(0); // Set the heartbeat log to a blank placeholder.
         }
         if (file_exists($status_file_path)) { // Check to see if the status message log.
             $status_log = array_keys(json_decode(file_get_contents($status_file_path), true)); // Load the status message log from the JSON data in the alerts file.
         } else { // If the heartbeat file doesn't exist, then load a blank placeholder instead.
-            $status_log = array(); // Set the status message log to an empty array.
+            $status_log = array(); // Set the status message log to a placeholder array.
         }
     } else {
-        $heartbeat_log = array(); // Set the heartbeat log to an empty array.
+        $heartbeat_log = array(0); // Set the heartbeat log to a blank placeholder.
+        $status_log = array(); // Set the status message log to a placeholder array.
     }
 
     $last_alert_heartbeat = microtime(true) - floatval(end($heartbeat_log)); // Calculate how many seconds ago the last heartbeat was, using the alert log.
-    $last_status_heartbeat = microtime(true) - floatval(end($status_log)); // Calculate how many seconds ago the last heartbeat was, using the status log.
+    if (sizeof($status_log) > 0) { // Check to make sure there is at least one status log entry
+        $last_status_heartbeat = microtime(true) - floatval(end($status_log)); // Calculate how many seconds ago the last heartbeat was, using the status log.
+    } else {
+        $last_status_heartbeat = microtime(true) - 0;
+    }
 
     if ($last_status_heartbeat < $last_alert_heartbeat) {
         $last_heartbeat = $last_status_heartbeat;
@@ -43,6 +48,7 @@ function last_heartbeat($config) {
     } else if ($last_heartbeat < 0) { // If the heartbeat is only a few seconds in the future, then assume the time since the last heartbeat is 0 seconds.
         $last_heartbeat = 0;
     }
+
     return $last_heartbeat;
 }
 
@@ -88,9 +94,6 @@ function verify_permissions($config) {
     } else if (is_writable($instance_configuration_path) == false) { // Check to see if the instance configuration file is writable.
         echo "<p class=\"error\">The instance configuration file at " . $instance_configuration_path . " doesn't appear to be writable.</p>";
         echo "<a class=\"button\" href=\"./settings.php\">Settings</a>";
-    }
-    if (is_dir($config["interface_directory"]) == false) { // Check to see if the Assassin interface directory exists.
-        echo "<p class=\"warning\">The interface directory doesn't appear to exist at " . $config["interface_directory"] . ". This may be the case if Assassin hasn't been started yet.</p>";
     }
 }
 
